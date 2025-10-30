@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qronon | Quantum Forecasting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>  
+    <!-- <header>
+      <h1>Qronon</h1>
+      <p>Quantum-Powered Forecasting for a Safer, Smarter World</p>
+    </header> -->
+
+    <header class="main-header">
+      <div class="container">
+        <div class="logo">Qronon</div>
+        <nav class="desktop-nav">
+          <a href="index.html" {'class="active"' if active_link == 'home' else ''}>Home</a>
+          <a href="solution.html" {'class="active"' if active_link == 'solution' else ''}>Solution</a>
+          <a href="usecase.html" {'class="active"' if active_link == 'usecase' else ''}>Use Case</a>
+          <a href="publications.html" {'class="active"' if active_link == 'publications' else ''}>Publications</a>
+          <a href="contact.html" {'class="active"' if active_link == 'contact' else ''}>Contact</a>
+
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero-video">
+      <video autoplay muted loop playsinline class="bg-video">
+        <source src="climate_resiliance.mp4" type="video/mp4" />
+        <!-- Your browser does not support HTML5 video. -->
+      </video>
+      <div class="video-overlay">
+        <div class="video-text">
+          <h1>Quantum-Powered<br />Climate Forecasting</h1>
+          <p>Enabling early warnings for floods, fires, and hurricanes—days before they strike.</p>
+          <a href="#about" onclick="showTab('about')">Explore Qronon</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section active">
+      <h2>About Us</h2>
+      <p>
+        Qronon is revolutionizing time series forecasting through the power of <span class="highlight">quantum computing and machine learning</span>. Our platform delivers extended, high-accuracy forecasts that empower organizations to make better decisions in critical sectors like weather prediction, disaster management, and beyond.
+      </p>
+    </section>
+
+    <section id = "contact" class="hero">
+      <div class="hero-content">
+        <!-- <h1>Forecast Tomorrow, Today</h1>
+        <p>Quantum computing for forecasting that saves lives and transforms industries.</p> -->
+        <p>
+          Whether you're an investor, researcher, or potential customer — we'd love to connect. Help us shape the future of predictive intelligence.
+        </p>
+        <a href="mailto:info.qronon@gmail.com" class="hero-cta">Get Involved</a>
+      </div>
+    </section>
+
+    <footer>
+      &copy; <span id="year"></span> Qronon. All rights reserved.
+    </footer>
+
+    <script src="scripts.js"></script>
+
+  </body>
+</html>

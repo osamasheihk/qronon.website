@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Qronon | Quantum Forecasting</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="container">
+            <div class="logo">Qronon</div>
+            <nav class="desktop-nav">
+                <a href="index.html" {'class="active"' if active_link == 'home' else ''}>Home</a>
+                <a href="solution.html" {'class="active"' if active_link == 'solution' else ''}>Solution</a>
+                <a href="usecase.html" {'class="active"' if active_link == 'usecase' else ''}>Use Case</a>
+                <a href="publications.html" {'class="active"' if active_link == 'publications' else ''}>Publications</a>
+                <a href="contact.html" {'class="active"' if active_link == 'contact' else ''}>Contact</a>
+
+            </nav>
+            </div>
+        </header>
+
+        <!-- <section id = "contact" class="hero"> -->
+            <!-- <div class="hero-content"> -->
+              <!-- <h1>Forecast Tomorrow, Today</h1>
+              <p>Quantum computing for forecasting that saves lives and transforms industries.</p> -->
+              <!-- <p> -->
+                <!-- Whether you're an investor, researcher, or potential customer — we'd love to connect. Help us shape the future of predictive intelligence. -->
+              <!-- </p> -->
+              <!-- <a href="mailto:info.qronon@gmail.com" class="hero-cta">Get Involved</a> -->
+            <!-- </div> -->
+        <!-- </section> -->
+
+        <section class="contact-container">
+            <div class="contact-left">
+              <h2>Qronon</h2>
+              <p>City and Guilds Building <br>Imperial College London<br> SW7 2AZ<br>London, UK</p>
+              <p><strong>Email:</strong><br><a href="mailto:info.qronon@gmail.com">info.qronon@gmail.com</a></p>
+            </div>
+          
+            <form class="contact-right" action="mailto:info.qronon@gmail.com" method="POST">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="first">First name *</label>
+                  <input type="text" id="first" name="first" required>
+                </div>
+                <div class="form-group">
+                  <label for="last">Last name *</label>
+                  <input type="text" id="last" name="last" required>
+                </div>
+              </div>
+          
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email *</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone">
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company">
+              </div>
+          
+              <div class="form-group">
+                <label>Reason for contact *</label>
+                <div class="radio-group">
+                  <label><input type="radio" name="reason" required> General Enquiries</label>
+                  <label><input type="radio" name="reason"> Qronon questions</label>
+                  <label><input type="radio" name="reason"> Investment questions</label>
+                  <label><input type="radio" name="reason"> Joining the team</label>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="message">How can we help? *</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+          
+              <button type="submit" class="submit-btn">Submit</button>
+            </form>
+          </section>
+          
+
+        <footer>
+            &copy; <span id="year"></span> Qronon. All rights reserved.
+        </footer>
+        <script src="scripts.js"></script>
+    </body>
+</html>

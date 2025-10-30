@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Qronon | Quantum Forecasting</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="container">
+            <div class="logo">Qronon</div>
+            <nav class="desktop-nav">
+                <a href="index.html" {'class="active"' if active_link == 'home' else ''}>Home</a>
+                <a href="solution.html" {'class="active"' if active_link == 'solution' else ''}>Solution</a>
+                <a href="usecase.html" {'class="active"' if active_link == 'usecase' else ''}>Use Case</a>
+                <a href="publications.html" {'class="active"' if active_link == 'publications' else ''}>Publications</a>
+                <a href="contact.html" {'class="active"' if active_link == 'contact' else ''}>Contact</a>
+
+            </nav>
+            </div>
+        </header>
+
+    <!-- <section id="solution" class="section active">
+        <h2>Why Qronon?</h2>
+        <ul>
+        <li>Quantum-enhanced models extend forecasting horizons up to 14 days and beyond</li>
+        <li>Actionable insights to prepare for disasters like hurricanes, floods, and wildfires</li>
+        <li>Scalable to finance, energy, logistics, and agriculture</li>
+        </ul>
+    </section> -->
+    <section id="solution" class="section active">
+        <h2>Why Qronon?</h2>
+        <p>
+            Qronon bridges the power of quantum computing with machine learning for real-world forecasting needs. Our proprietary quantum reservoir computing models outperform classical machine learning in processing high-dimensional, chaotic systems like weather, energy demand, and financial volatility.
+        </p>
+      
+        <ul>
+          <li><strong>Extended Forecasting Horizons:</strong> Improvement in the prediction horizon of extreme weather events 5-10% better than traditional classical methods.</li>
+          <li><strong>Sector Flexibility:</strong> Our platform adapts seamlessly to different industries—weather, logistics, energy, finance, and agriculture—using tailored time series data.</li>
+          <!-- <li><strong>Quantum :</strong> Our models leverage quantum entanglement and coherence to capture patterns traditional models miss—leading to better accuracy and earlier signals.</li> -->
+          <li><strong>AI-Augmented Models:</strong> Classical and quantum models are blended with AI tuning to ensure practical usability and interpretability for non-scientists.</li>
+          <li><strong>API & SaaS Integration:</strong> Easily integrate forecasts into dashboards or analytics pipelines via RESTful APIs or as a plug-and-play SaaS platform.</li>
+        </ul>
+      </section>
+
+    <footer>
+        &copy; <span id="year"></span> Qronon. All rights reserved.
+    </footer>
+    <script src="scripts.js"></script>
+    </body>
+</html>

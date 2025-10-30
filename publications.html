@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Qronon | Quantum Forecasting</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="container">
+            <div class="logo">Qronon</div>
+            <nav class="desktop-nav">
+              <a href="index.html" {'class="active"' if active_link == 'home' else ''}>Home</a>
+              <a href="solution.html" {'class="active"' if active_link == 'solution' else ''}>Solution</a>
+              <a href="usecase.html" {'class="active"' if active_link == 'usecase' else ''}>Use Case</a>
+              <a href="publications.html" {'class="active"' if active_link == 'publications' else ''}>Publications</a>
+              <a href="contact.html" {'class="active"' if active_link == 'contact' else ''}>Contact</a>
+
+            </nav>
+            </div>
+        </header>
+
+        <section id="publications" class="section active">
+            <h2>Publications</h2>
+            <ul>
+              <li>
+                <strong>Prediction of chaotic dynamics and extreme events: A recurrence-free quantum reservoir computing approach</strong><br>
+                <em>Phys. Rev. Research 6, 043082 – Published 1 November, 2024</em><br>
+                DOI: <a href="https://doi.org/10.1103/PhysRevResearch.6.043082" target="_blank">10.1103/PhysRevResearch.6.043082</a>
+              </li>
+              <li style="margin-top: 20px;">
+                <strong>Optimal training of finitely sampled quantum reservoir computers for forecasting of chaotic dynamics</strong><br>
+                <em>Published: 27 February 2025</em><br>
+                DOI: <a href="https://doi.org/10.1007/s42484-025-00261-9" target="_blank">10.1007/s42484-025-00261-9</a>
+              </li>
+            </ul>
+          </section>
+
+        <footer>
+            &copy; <span id="year"></span> Qronon. All rights reserved.
+        </footer>
+
+        <script src="scripts.js"></script>
+    </body>
+
+</html>
+    
