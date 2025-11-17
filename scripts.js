@@ -15,6 +15,37 @@ document.addEventListener("DOMContentLoaded", function () {
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
+
+  // Mobile menu toggle
+  const menuToggle = document.querySelector('.mobile-menu-toggle');
+  const nav = document.querySelector('.desktop-nav');
+  
+  if (menuToggle) {
+    menuToggle.addEventListener('click', function() {
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('.desktop-nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const isClickInsideMenu = nav.contains(event.target);
+      const isClickOnToggle = menuToggle.contains(event.target);
+      
+      if (!isClickInsideMenu && !isClickOnToggle && nav.classList.contains('active')) {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+      }
+    });
+  }
 });
 
 
