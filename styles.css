@@ -1,10 +1,58 @@
 body {
   margin: 0;
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   font-family: 'Inter', sans-serif;
   background-color: #f4f4f4;
   color: #333;
+  scroll-behavior: smooth;
+  opacity: 0;
+  animation: pageLoad 0.5s ease-in forwards;
 }
+
+@keyframes pageLoad {
+  to { opacity: 1; }
+}
+
+/* Optimized animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Apply animations */
+.section {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.hero {
+  animation: fadeIn 1s ease-out;
+}
+
+.video-text {
+  animation: slideInLeft 1s ease-out;
+}
+
 nav {
   display: flex;
   justify-content: center;
@@ -19,6 +67,39 @@ nav {
   padding: 40px 20px;
   max-width: 1000px;
   margin: auto;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.section h2 {
+  color: #0b132b;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.section ul li {
+  padding: 12px 0;
+  padding-left: 30px;
+  position: relative;
+  line-height: 1.6;
+  transition: transform 0.3s ease;
+}
+
+.section ul li:hover {
+  transform: translateX(5px);
+}
+
+.section ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: #a3d2ca;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .highlight {
@@ -36,7 +117,16 @@ nav {
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
+
+.cta a:hover {
+  background-color: #1c2541;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 footer {
   background-color: #1c2541;
   color: white;
@@ -66,10 +156,14 @@ footer {
     font-weight: bold;
     text-decoration: none;
     border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-block;
   }
   .hero-cta:hover {
     background: #ffffff;
     color: #0b132b;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
   }
 
   /* video format */
@@ -77,6 +171,7 @@ footer {
     position: relative;
     height: 100vh;
     overflow: hidden;
+    background: #0b132b;
   }
   
   .bg-video {
@@ -87,6 +182,12 @@ footer {
     min-height: 100%;
     object-fit: cover;
     z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+  }
+
+  .bg-video.loaded {
+    opacity: 1;
   }
   
   .video-overlay {
@@ -123,6 +224,13 @@ footer {
     text-decoration: none;
     font-weight: bold;
     border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .video-text a:hover {
+    background-color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
   }
 
   
@@ -155,7 +263,23 @@ footer {
   text-decoration: none;
   color: #0b132b;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.desktop-nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: #a3d2ca;
+  transition: width 0.3s ease;
+}
+
+.desktop-nav a:hover::after {
+  width: 100%;
 }
 
 .desktop-nav a:hover {
@@ -164,7 +288,10 @@ footer {
 
 .desktop-nav a.active {
   color: #a3d2ca;
-  border-bottom: 2px solid #a3d2ca;
+}
+
+.desktop-nav a.active::after {
+  width: 100%;
 }
 
 /* Mobile menu toggle button */
@@ -298,6 +425,7 @@ footer {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .contact-left {
@@ -348,6 +476,14 @@ textarea {
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #a3d2ca;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
 }
 
 textarea {
@@ -370,9 +506,83 @@ textarea {
   border-radius: 8px;
   cursor: pointer;
   font-size: 1em;
+  transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
   background-color: #0b132b;
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(11, 19, 43, 0.3);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Publications page styling */
+#publications ul li {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+#publications ul li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+#publications ul li::before {
+  content: '📄';
+  margin-right: 10px;
+}
+
+#publications a {
+  color: #0b132b;
+  text-decoration: none;
+  border-bottom: 2px solid #a3d2ca;
+  transition: all 0.3s ease;
+}
+
+#publications a:hover {
+  color: #a3d2ca;
+  border-bottom-color: #0b132b;
+}
+
+/* Use case page styling */
+#usecase h3 {
+  color: #0b132b;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add subtle page transition */
+body {
+  opacity: 0;
+  animation: pageLoad 0.5s ease-in forwards;
+}
+
+@keyframes pageLoad {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Enhanced logo animation on hover */
+.logo {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  color: #a3d2ca;
+  transform: scale(1.05);
 }
