@@ -12,12 +12,11 @@
             <div class="container">
             <div class="logo">Qronon</div>
             <nav class="desktop-nav">
-                <a href="index.html" {'class="active"' if active_link == 'home' else ''}>Home</a>
-                <a href="solution.html" {'class="active"' if active_link == 'solution' else ''}>Solution</a>
-                <a href="usecase.html" {'class="active"' if active_link == 'usecase' else ''}>Use Case</a>
-                <a href="publications.html" {'class="active"' if active_link == 'publications' else ''}>Publications</a>
-                <a href="contact.html" {'class="active"' if active_link == 'contact' else ''}>Contact</a>
-
+                <a href="index.html">Home</a>
+                <a href="solution.html">Solution</a>
+                <a href="usecase.html">Use Case</a>
+                <a href="publications.html">Publications</a>
+                <a href="contact.html" class="active">Contact</a>
             </nav>
             </div>
         </header>
@@ -40,7 +39,7 @@
               <p><strong>Email:</strong><br><a href="mailto:info.qronon@gmail.com">info.qronon@gmail.com</a></p>
             </div>
           
-            <form class="contact-right" action="mailto:info.qronon@gmail.com" method="POST">
+            <form class="contact-right" action="https://formspree.io/f/mrbrwbnj" method="POST">
               <div class="form-row">
                 <div class="form-group">
                   <label for="first">First name *</label>
@@ -71,10 +70,10 @@
               <div class="form-group">
                 <label>Reason for contact *</label>
                 <div class="radio-group">
-                  <label><input type="radio" name="reason" required> General Enquiries</label>
-                  <label><input type="radio" name="reason"> Qronon questions</label>
-                  <label><input type="radio" name="reason"> Investment questions</label>
-                  <label><input type="radio" name="reason"> Joining the team</label>
+                  <label><input type="radio" name="reason" value="general" required> General Enquiries</label>
+                  <label><input type="radio" name="reason" value="questions"> Qronon questions</label>
+                  <label><input type="radio" name="reason" value="investment"> Investment questions</label>
+                  <label><input type="radio" name="reason" value="joining"> Joining the team</label>
                 </div>
               </div>
           
@@ -82,6 +81,9 @@
                 <label for="message">How can we help? *</label>
                 <textarea id="message" name="message" required></textarea>
               </div>
+
+              <!-- Honeypot for spam protection -->
+              <input type="text" name="_gotcha" style="display:none">
           
               <button type="submit" class="submit-btn">Submit</button>
             </form>
