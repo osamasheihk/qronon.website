@@ -521,35 +521,98 @@ textarea {
 }
 
 /* Publications page styling */
-#publications ul li {
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.publication-item {
+  display: flex;
+  gap: 30px;
   background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  padding: 30px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
+  align-items: flex-start;
 }
 
-#publications ul li:hover {
+.publication-item:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-#publications ul li::before {
-  content: '📄';
-  margin-right: 10px;
+.publication-image {
+  flex-shrink: 0;
+  width: 300px;
+  height: auto;
 }
 
-#publications a {
+.publication-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.publication-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.publication-content h3 {
+  font-size: 1.3em;
+  color: #0b132b;
+  margin: 0;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.publication-title {
+  font-size: 1.15em;
+  font-style: italic;
+  color: #333;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.publication-venue {
+  color: #555;
+  margin: 0;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.publication-doi {
+  margin: 5px 0 0 0;
+  font-size: 0.95em;
+}
+
+.publication-doi a {
   color: #0b132b;
   text-decoration: none;
   border-bottom: 2px solid #a3d2ca;
   transition: all 0.3s ease;
 }
 
-#publications a:hover {
+.publication-doi a:hover {
   color: #a3d2ca;
   border-bottom-color: #0b132b;
+}
+
+/* Responsive design for publications */
+@media (max-width: 768px) {
+  .publication-item {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .publication-image {
+    width: 100%;
+  }
 }
 
 /* Use case page styling */
@@ -557,6 +620,126 @@ textarea {
   color: #0b132b;
   margin-top: 30px;
   margin-bottom: 15px;
+}
+
+#usecase .intro-text {
+  font-size: 1.1em;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  color: #555;
+}
+
+/* Use case grid layout */
+.use-case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin: 40px 0;
+}
+
+.use-case-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.use-case-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-left-color: #a3d2ca;
+}
+
+.use-case-card.featured {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-left-color: #a3d2ca;
+  border-left-width: 5px;
+}
+
+.use-case-card.featured:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+.card-icon {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  line-height: 1;
+}
+
+.use-case-card h3 {
+  color: #0b132b;
+  font-size: 1.3em;
+  margin: 15px 0 10px 0;
+  font-weight: 600;
+}
+
+.use-case-card p {
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.use-case-card strong {
+  color: #0b132b;
+}
+
+/* CTA section at bottom */
+.cta-section {
+  text-align: center;
+  margin-top: 60px;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+}
+
+.cta-section h3 {
+  font-size: 2em;
+  color: #0b132b;
+  margin-bottom: 15px;
+}
+
+.cta-section p {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 15px 40px;
+  background-color: #a3d2ca;
+  color: #0b132b;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #0b132b;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(11, 19, 43, 0.3);
+}
+
+/* Responsive adjustments for use cases */
+@media (max-width: 768px) {
+  .use-case-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cta-section h3 {
+    font-size: 1.5em;
+  }
+
+  .cta-section p {
+    font-size: 1em;
+  }
 }
 
 /* Smooth scroll for anchor links */
