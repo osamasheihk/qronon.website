@@ -1061,10 +1061,10 @@ body {
 }
 
 .qronon-hero h1 {
-  max-width: 780px;
+  max-width: 680px;
   margin: 0;
-  font-size: clamp(2.8rem, 5.8vw, 5.6rem);
-  line-height: 1;
+  font-size: clamp(2.35rem, 4.4vw, 4.35rem);
+  line-height: 1.05;
   letter-spacing: 0;
   font-weight: 700;
 }
@@ -1424,7 +1424,7 @@ body {
   }
 
   .qronon-hero h1 {
-    font-size: 2.75rem;
+    font-size: 2.25rem;
   }
 
   .qronon-hero__intro {
