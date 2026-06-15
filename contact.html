@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Qronon | Quantum Forecasting</title>
+        <link rel="icon" type="image/png" href="qronon_favicon.png">
         
         <!-- Preconnect to optimize font loading -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +16,21 @@
     <body>
         <header class="main-header">
             <div class="container">
-            <div class="logo">Qronon</div>
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+            <a class="logo" href="index.html" aria-label="Qronon home">
+                <img class="logo-mark" src="qronon-transparent.png" alt="" aria-hidden="true">
+            </a>
+            <button
+              class="mobile-menu-toggle"
+              type="button"
+              aria-label="Toggle navigation"
+              aria-controls="primary-navigation"
+              aria-expanded="false"
+            >
               <span></span>
               <span></span>
               <span></span>
             </button>
-            <nav class="desktop-nav">
+            <nav class="desktop-nav" id="primary-navigation" aria-label="Primary navigation">
                 <a href="index.html">Home</a>
                 <a href="solution.html">Solution</a>
                 <a href="usecase.html">Use Case</a>

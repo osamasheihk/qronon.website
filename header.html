@@ -1,13 +1,25 @@
 <header class="main-header">
     <div class="container">
-      <div class="logo">Qronon</div>
-      <nav class="desktop-nav">
-        <a href="index.html" {'class="active"' if active_link == 'home' else ''}>Home</a>
-        <a href="solution.html" {'class="active"' if active_link == 'solution' else ''}>Solution</a>
-        <a href="usecase.html" {'class="active"' if active_link == 'usecase' else ''}>Use Case</a>
-        <a href="research.html" {'class="active"' if active_link == 'publications' else ''}>Research</a>
-        <a href="contact.html" {'class="active"' if active_link == 'contact' else ''}>Contact</a>
-
+      <a class="logo" href="index.html" aria-label="Qronon home">
+        <img class="logo-mark" src="qronon-transparent.png" alt="" aria-hidden="true">
+      </a>
+      <button
+        class="mobile-menu-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-controls="primary-navigation"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="desktop-nav" id="primary-navigation" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="solution.html">Solution</a>
+        <a href="usecase.html">Use Case</a>
+        <a href="research.html">Research</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </div>
 </header>

@@ -3,9 +3,8 @@
   'use strict';
 
   // Cache DOM elements
-  const body = document.body;
   const yearSpan = document.getElementById("year");
-  const video = document.querySelector('.bg-video');
+  const video = document.querySelector('.bg-video, .qronon-hero__video');
   const menuToggle = document.querySelector('.mobile-menu-toggle');
   const nav = document.querySelector('.desktop-nav');
 
@@ -62,7 +61,7 @@
     }, observerOptions);
 
     // Initialize scroll animations
-    const animatedElements = document.querySelectorAll('.section, .contact-container');
+    const animatedElements = document.querySelectorAll('.section, .contact-container, .home-reveal');
     animatedElements.forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(30px)';
@@ -74,13 +73,15 @@
   // Mobile menu handling
   if (menuToggle && nav) {
     const toggleMenu = () => {
-      menuToggle.classList.toggle('active');
-      nav.classList.toggle('active');
+      const isOpen = menuToggle.classList.toggle('active');
+      nav.classList.toggle('active', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
     };
 
     const closeMenu = () => {
       menuToggle.classList.remove('active');
       nav.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
     };
 
     // Toggle on button click
@@ -109,46 +110,4 @@
     });
   }
 
-  // Tab switching function (if needed)
-  window.showTab = function(tabId) {
-    const sections = document.querySelectorAll('.section');
-    const buttons = document.querySelectorAll('.tab-button');
-    const targetSection = document.getElementById(tabId);
-    
-    if (targetSection) {
-      sections.forEach(section => section.classList.remove('active'));
-      buttons.forEach(btn => btn.classList.remove('active'));
-      targetSection.classList.add('active');
-      
-      const targetButton = document.querySelector(`button[onclick="showTab('${tabId}')"]`);
-      if (targetButton) targetButton.classList.add('active');
-    }
-  };
-
 })();
-
-
-// function to load header and footer automatically
-function loadPart(id, file) {
-  fetch(file)
-    .then(res => {
-      if (!res.ok) throw new Error(`Failed to load ${file}`);
-      return res.text();
-    })
-    .then(html => {
-      document.getElementById(id).innerHTML = html;
-
-      // If it's the footer, also update the year
-      if (file === 'footer.html') {
-        const year = new Date().getFullYear();
-        const yearEl = document.getElementById("year");
-        if (yearEl) yearEl.textContent = year;
-      }
-    })
-    .catch(err => console.error(err));
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadPart("header-placeholder", "header.html");
-  loadPart("footer-placeholder", "footer.html");
-});
