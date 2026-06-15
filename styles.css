@@ -1045,8 +1045,9 @@ body {
 .qronon-hero__content {
   position: relative;
   z-index: 2;
-  width: min(1120px, calc(100% - 40px));
-  margin: 0 auto;
+  width: min(760px, calc(100% - 40px));
+  margin-left: clamp(32px, 7vw, 120px);
+  margin-right: auto;
   padding: 0 0 8rem;
   color: white;
 }
@@ -1061,12 +1062,16 @@ body {
 }
 
 .qronon-hero h1 {
-  max-width: 680px;
+  max-width: 760px;
   margin: 0;
-  font-size: clamp(2.35rem, 4.4vw, 4.35rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 3.7vw, 3.7rem);
+  line-height: 1.08;
   letter-spacing: 0;
   font-weight: 700;
+}
+
+.qronon-hero h1 span {
+  display: block;
 }
 
 .qronon-hero__intro {
@@ -1420,11 +1425,13 @@ body {
   }
 
   .qronon-hero__content {
+    margin-left: auto;
+    margin-right: auto;
     padding-bottom: 4.75rem;
   }
 
   .qronon-hero h1 {
-    font-size: 2.25rem;
+    font-size: 1.95rem;
   }
 
   .qronon-hero__intro {
