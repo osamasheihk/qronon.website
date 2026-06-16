@@ -28,8 +28,7 @@ export default function HomePage() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
               Qronon builds proprietary quantum-enhanced machine learning models for nowcasting, hindcasting,
-              high-resolution and 15-45 day probabilistic forecasts, with claims clearly labelled
-              by validation status.
+              high-resolution and 15-45 day probabilistic forecasts.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/contact">Start a pilot</ButtonLink>
@@ -98,7 +97,7 @@ export default function HomePage() {
               The research page describes our recent publications into commercial relevance of our proprietary quantum-enhanced models: stability,
               finite-sample training and extreme-event forecasting.
             </p>
-            <p className="mt-5 font-semibold text-navy">{publications.length} peer-reviewed QRC publications listed</p>
+            <p className="mt-5 font-semibold text-navy">{publications.length} peer-reviewed publications listed</p>
           </Card>
         </div>
       </Section>

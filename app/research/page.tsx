@@ -23,12 +23,18 @@ export default function ResearchPage() {
           {publications.map((publication) => (
             <Card key={publication.doi}>
               <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
-                <img
-                  src={publication.image}
-                  alt=""
-                  className="aspect-[4/3] w-full rounded-md border border-line object-cover"
-                  loading="lazy"
-                />
+                {publication.image ? (
+                  <img
+                    src={publication.image}
+                    alt=""
+                    className="aspect-[4/3] w-full rounded-md border border-line object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="flex aspect-[4/3] w-full items-center justify-center rounded-md border border-line bg-panel p-6 text-center text-sm font-bold uppercase tracking-wide text-slate-500">
+                    Conference abstract
+                  </div>
+                )}
                 <div>
                   <h2 className="text-2xl font-bold leading-tight text-navy">{publication.title}</h2>
                   <p className="mt-3 text-slate-600">{publication.venue} · {publication.date}</p>

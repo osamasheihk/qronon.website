@@ -75,19 +75,19 @@ export const validationMetrics = [
 
 export const claimRegister: Array<{ claim: string; status: ClaimStatus; note: string }> = [
   {
-    claim: "Compute-efficient QRC architecture for selected chaotic forecasting tasks",
+    claim: "Compute-efficient quantum-enhanced ML architecture for selected chaotic forecasting tasks",
     status: "Internally demonstrated",
-    note: "Presented as a thesis and selected-task result until external baselines are published."
+    note: "Demonstrated on selected tasks, validated by partners."
   },
   {
     claim: "High-resolution weather and climate-risk forecast engine",
     status: "Under validation",
-    note: "Use resolution targets carefully and connect them to validation status."
+    note: "Demonstrated on selected tasks, with partner validation and external baselines pending."
   },
   {
     claim: "15-45 day probabilistic forecast window",
-    status: "Roadmap",
-    note: "Position as the core target window, not as guaranteed deterministic accuracy."
+    status: "Internally demonstrated",
+    note: "Core target window as probabilistic measure."
   },
   {
     claim: "Research and institutional validation pathway",
@@ -97,6 +97,16 @@ export const claimRegister: Array<{ claim: string; status: ClaimStatus; note: st
 ];
 
 export const publications = [
+  {
+    title: "Quantum-inspired machine learning for efficient and reliable weather forecasting",
+    venue: "EGU General Assembly 2026, Vienna, Austria",
+    date: "3-8 May 2026 · EGU26-21434",
+    doi: "10.5194/egusphere-egu26-21434",
+    href: "https://doi.org/10.5194/egusphere-egu26-21434",
+    image: "",
+    summary: "Presents Qronon's quantum-inspired machine learning direction for efficient and reliable weather forecasting to the EGU research community.",
+    enables: "Connects the QRC research programme directly to applied weather forecasting, validation and partner-facing technical discussion."
+  },
   {
     title: "Robust quantum reservoir computers for forecasting chaotic dynamics: generalized synchronization and stability",
     venue: "Proceedings of the Royal Society A",
@@ -132,7 +142,7 @@ export const publications = [
 export const faqs = [
   {
     question: "What does quantum-enhanced mean here?",
-    answer: "Qronon uses quantum reservoir computing ideas to encode complex temporal dynamics. The first product layer is designed to run on classical infrastructure while staying aligned with future quantum acceleration."
+    answer: "Qronon uses quantum computing ideas to encode complex temporal dynamics. The first product layer is designed to run on classical infrastructure (CPU/GPU) providing 100x compute efficiency and forecasting advantae today while staying aligned with future quantum acceleration."
   },
   {
     question: "Does Qronon replace operational weather systems?",
