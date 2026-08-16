@@ -1,4 +1,4 @@
-const applications = [
+export const applications = [
   {
     slug: 'weather',
     title: 'Weather',

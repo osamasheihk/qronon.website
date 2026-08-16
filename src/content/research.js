@@ -1,4 +1,4 @@
-const research = [
+export const research = [
   {
     title: 'Robust quantum reservoir computers for forecasting chaotic dynamics',
     meta: 'Proceedings of the Royal Society A · 2025',
