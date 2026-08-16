@@ -22,7 +22,7 @@ The main files to edit are:
 | Logo and favicon | `public/` |
 | Formspree endpoint | `FORMSPREE_ENDPOINT` in `src/main.jsx` |
 | Careers role copy | `mlRole` and `JobDetail` in `src/main.jsx` |
-| GitHub Pages deployment | `.github/workflows/deploy-pages.yml` |
+| GitHub Pages deployment | `.github/workflows/pages.yml` |
 
 The live chaotic-system animation is the `SystemVisual` component in
 `src/main.jsx`.
@@ -38,6 +38,10 @@ The production output is generated in `dist/`. Do not edit `dist/` directly;
 it is recreated on every build and is intentionally excluded from Git.
 
 ## Replace the previous Next.js repository
+
+Copy the contents of this folder into the repository root, not the enclosing
+folder itself. The included `.github/workflows/pages.yml` uses the same filename
+as Qronon's previous Pages workflow, so the old Next.js workflow is replaced.
 
 1. Create a backup branch of the existing repository.
 2. Remove or disable the old Next.js Pages workflow. Only one workflow should
