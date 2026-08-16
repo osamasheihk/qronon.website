@@ -1,0 +1,38 @@
+const applications = [
+  {
+    slug: 'weather',
+    title: 'Weather',
+    short: 'Forecasts for the conditions that change the plan.',
+    description: 'From minutes to weeks, Qronon turns atmospheric dynamics into earlier signals for severe weather and operational decisions.',
+    detail: 'High-resolution nowcasting, medium-range outlooks and calibrated event probabilities for teams that need to act before conditions become obvious.',
+    icon: 'cloud',
+    outcomes: ['Earlier extreme-event signals', 'Probabilistic outlooks', 'API-ready forecast fields'],
+  },
+  {
+    slug: 'climate-risk',
+    title: 'Climate risk',
+    short: 'A live view of risk in a changing physical world.',
+    description: 'Weather-conditioned signals for climate analytics, adaptation planning and resilience decisions.',
+    detail: 'Add a dynamic forecasting layer to risk models that need to understand how near-term weather and longer-term exposure interact.',
+    icon: 'globe',
+    outcomes: ['Scenario-aware risk inputs', 'Faster event conditioning', 'Clearer uncertainty bands'],
+  },
+  {
+    slug: 'energy-grids',
+    title: 'Energy & grids',
+    short: 'Make volatility visible before it reaches the system.',
+    description: 'Probabilistic weather signals for demand, renewable generation, imbalance and grid stress planning.',
+    detail: 'Give energy teams a more useful view of the forecast distribution when supply, demand and infrastructure are all responding to the same changing atmosphere.',
+    icon: 'grid',
+    outcomes: ['Renewable generation signals', 'Demand uncertainty', 'Grid-stress scenarios'],
+  },
+  {
+    slug: 'insurance-resilience',
+    title: 'Insurance & resilience',
+    short: 'Understand the event before it becomes the loss.',
+    description: 'Forecast-engine outputs for portfolio monitoring, early warning and resilience planning.',
+    detail: 'Translate uncertain atmospheric dynamics into scenario inputs and thresholds that can support underwriting, portfolio and public resilience workflows.',
+    icon: 'shield',
+    outcomes: ['Portfolio exposure signals', 'Earlier risk flags', 'Decision-ready scenarios'],
+  },
+];

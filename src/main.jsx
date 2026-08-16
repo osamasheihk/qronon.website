@@ -1,114 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
-
-const applications = [
-  {
-    slug: 'weather',
-    title: 'Weather',
-    short: 'Forecasts for the conditions that change the plan.',
-    description: 'From minutes to weeks, Qronon turns atmospheric dynamics into earlier signals for severe weather and operational decisions.',
-    detail: 'High-resolution nowcasting, medium-range outlooks and calibrated event probabilities for teams that need to act before conditions become obvious.',
-    icon: 'cloud',
-    outcomes: ['Earlier extreme-event signals', 'Probabilistic outlooks', 'API-ready forecast fields'],
-  },
-  {
-    slug: 'climate-risk',
-    title: 'Climate risk',
-    short: 'A live view of risk in a changing physical world.',
-    description: 'Weather-conditioned signals for climate analytics, adaptation planning and resilience decisions.',
-    detail: 'Add a dynamic forecasting layer to risk models that need to understand how near-term weather and longer-term exposure interact.',
-    icon: 'globe',
-    outcomes: ['Scenario-aware risk inputs', 'Faster event conditioning', 'Clearer uncertainty bands'],
-  },
-  {
-    slug: 'energy-grids',
-    title: 'Energy & grids',
-    short: 'Make volatility visible before it reaches the system.',
-    description: 'Probabilistic weather signals for demand, renewable generation, imbalance and grid stress planning.',
-    detail: 'Give energy teams a more useful view of the forecast distribution when supply, demand and infrastructure are all responding to the same changing atmosphere.',
-    icon: 'grid',
-    outcomes: ['Renewable generation signals', 'Demand uncertainty', 'Grid-stress scenarios'],
-  },
-  {
-    slug: 'insurance-resilience',
-    title: 'Insurance & resilience',
-    short: 'Understand the event before it becomes the loss.',
-    description: 'Forecast-engine outputs for portfolio monitoring, early warning and resilience planning.',
-    detail: 'Translate uncertain atmospheric dynamics into scenario inputs and thresholds that can support underwriting, portfolio and public resilience workflows.',
-    icon: 'shield',
-    outcomes: ['Portfolio exposure signals', 'Earlier risk flags', 'Decision-ready scenarios'],
-  },
-];
-
-const research = [
-  {
-    title: 'Robust quantum reservoir computers for forecasting chaotic dynamics',
-    meta: 'Proceedings of the Royal Society A · 2025',
-    href: 'https://doi.org/10.1098/rspa.2025.0550',
-  },
-  {
-    title: 'Optimal training of finitely sampled quantum reservoir computers',
-    meta: 'Quantum Machine Intelligence · 2025',
-    href: 'https://doi.org/10.1007/s42484-025-00261-9',
-  },
-  {
-    title: 'Prediction of chaotic dynamics and extreme events',
-    meta: 'Physical Review Research · 2024',
-    href: 'https://doi.org/10.1103/PhysRevResearch.6.043082',
-  },
-];
+import { mlRole } from './content/jobs.js';
+import { applications } from './content/applications.js';
+import { research } from './content/research.js';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mrbrwbnj';
-
-const mlRole = {
-  slug: 'founding-machine-learning-engineer-researcher',
-  title: 'Founding Machine Learning Engineer / Researcher',
-  location: 'London, UK',
-  employmentType: 'Full-time',
-  rightToWork: 'Applicants must already have the right to work in the UK; visa sponsorship is not currently available.',
-  responsibilities: [
-    'Develop and improve machine learning models for weather forecasting and extreme-event prediction.',
-    'Run experiments with Qronon models for specific clients and projects.',
-    'Keep up to date with relevant machine learning research and implement promising methods in the Qronon codebase.',
-    'Deploy models in live environments and improve them using evidence from real-world operation.',
-    'Help architect high-volume data pipelines and collect data alongside the data team.',
-    'Help solve forecasting and optimisation problems across energy and other weather-sensitive sectors.',
-  ],
-  qualifications: [
-    'A passion for helping the world reduce carbon emissions.',
-    'Strong foundations in machine learning, including modern deep-learning architectures and training methods.',
-    'Strong Python and Git experience, with particular interest in JAX.',
-    'Experience working with large, high-dimensional or spatiotemporal datasets.',
-    'Good intuition for real-world data: how it can fail, how to identify those failures and how to address them.',
-    'A sound understanding of statistical evaluation, uncertainty and the difference between an impressive demonstration and a genuinely better predictive model.',
-    'Enthusiasm for learning, experimentation and rigorous model comparison.',
-    'Clear written and verbal communication, including the ability to explain technical trade-offs to specialist and non-specialist colleagues.',
-    'An interest in working across a cross-functional team, from research and data engineering to back-end and front-end implementation.',
-  ],
-  beneficial: [
-    'Experience contributing to open-source code or communities.',
-    'An interest in writing or speaking about technical work.',
-    'Machine learning for weather, climate, Earth observation or another physical dynamical system.',
-    'Graph neural networks, transformers, neural operators, state-space models, generative or diffusion methods, or other architectures for spatiotemporal prediction.',
-    'Probabilistic forecasting, ensemble methods, calibration, data assimilation or extreme-event evaluation.',
-    'Atmospheric datasets and tools such as ERA5, NetCDF, Zarr, xarray or Dask.',
-    'Distributed training, GPU optimisation and HPC environments such as Slurm.',
-    'Numerical weather prediction, atmospheric dynamics or verification metrics used in operational forecasting.',
-    'Taking a research model into an API, live product, commercial pilot or other operational setting.',
-    'Publishing high-quality research or making significant contributions to strong open-source technical projects.',
-    'Quantum computing, quantum machine learning or quantum-inspired optimisation. This supports Qronon’s longer-term research direction but is not required for success in the role.',
-  ],
-  benefits: [
-    '£50,000–£65,000, based on experience and London weighting.',
-    'Flexible hours.',
-    'Autonomy in how you deliver your work.',
-    '30 days of annual leave, excluding UK public holidays.',
-    'Private healthcare and global travel insurance after successful completion of the probation period.',
-    '7% employer pension contribution.',
-    'Training and development budget.',
-  ],
-};
 
 function Icon({ name, size = 24 }) {
   const common = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.35, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true };
@@ -424,7 +321,7 @@ function JobSection({ title, children }) {
 }
 
 function JobDetail() {
-  const applicationEmail = 'mailto:info@qronon.ai?subject=Founding%20Machine%20Learning%20Engineer%20%2F%20Researcher';
+  const applicationEmail = 'mailto:info@qronon.ai?subject=Machine%20Learning%20Engineer%20%2F%20Researcher';
 
   return <main className="page-main job-page">
     <PageIntro title={mlRole.title} copy={`${mlRole.location} · ${mlRole.employmentType} · Applications reviewed on a rolling basis.`} />
@@ -436,7 +333,7 @@ function JobDetail() {
       </aside>
       <div className="job-body">
         <JobSection title="About the job">
-          <p>We are looking for a Founding Machine Learning Engineer / Researcher to help develop and implement novel machine learning approaches for weather forecasting and extreme-event prediction.</p>
+          <p>We are looking for a Machine Learning Engineer / Researcher to help develop and implement novel machine learning approaches for weather forecasting and extreme-event prediction.</p>
           <p>You will work with large datasets including weather forecasts, reanalysis data, satellite imagery and real-time time-series data. The role spans the full machine learning workflow, from data engineering and model development to validation and implementation.</p>
           <p>As an early technical hire, you will work with the entire Qronon team to deliver a product across data engineering, machine learning, validation and implementation. You will help build the solution directly and have opportunities to engage with open-source contributors.</p>
         </JobSection>
@@ -448,7 +345,7 @@ function JobDetail() {
         <JobSection title="Beneficial skills"><JobList items={mlRole.beneficial} /></JobSection>
         <JobSection title="Benefits"><JobList items={mlRole.benefits} /></JobSection>
         <JobSection title="About Qronon">
-          <p>Qronon is a UK-based company developing quantum machine learning models for forecasting weather and extreme events. Our main focus today is solar nowcasting: we aim to collaboratively build the world’s best forecasting system for solar electricity generation.</p>
+          <p>Qronon is a UK-based company developing quantum machine learning models for forecasting weather and extreme events,.</p>
           <p>You will join a team of six. Qronon is supported by innovation funding from the UK Department for Science, Innovation and Technology.</p>
         </JobSection>
         <section className="job-inclusion"><h2>Bring your perspective.</h2><p>Studies show that applicants from diverse and historically under-represented backgrounds are less likely to apply unless they meet every listed qualification. At Qronon, we are looking for people who are genuinely passionate about developing quantum-enhanced climate solutions, and we actively encourage applicants from all backgrounds. If you believe you have the potential to do well in this role and your values align with our mission, we encourage you to contact us.</p></section>
