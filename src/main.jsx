@@ -425,7 +425,7 @@ function JobDetail() {
       </aside>
       <div className="job-body">
         <JobSection title="About the job">
-        <p>We are looking for a Machine Learning Engineer / Researcher to help develop and implement novel machine learning approaches for weather forecasting, extreme-event prediction and energy applications.</p>
+        <p>We are looking for a Machine Learning Engineer / Researcher to help develop and implement novel machine learning approaches for weather forecasting, extreme-event prediction and energy applications with a project funded by the Advanced Research + Invention Agency. .</p>
         <p>You will work with large, high-dimensional and spatiotemporal datasets, including weather forecasts, reanalysis data, satellite imagery and real-time time-series data. The role spans the full machine learning workflow, from data engineering and model development to rigorous validation, deployment and improvement using evidence from real-world operation.</p>
         <p>As an early technical hire, you will work closely with the founders and wider Qronon team, taking significant ownership of machine learning development. You will run experiments, implement promising methods from the latest research, and help turn new forecasting approaches into reliable systems for real-world weather and energy applications.</p>
         </JobSection>
