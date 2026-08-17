@@ -309,7 +309,99 @@ function Research() {
 }
 
 function Careers() {
-  return <main className="page-main"><PageIntro title="Work on the hardest prediction problems." copy="We are building a small, research-led team across quantum machine learning, forecasting, earth observation and product engineering." /><section className="careers-section section-shell section-pad"><div className="careers-intro"><span className="section-label">Careers at Qronon</span><h2>Bring depth.<br />Stay curious.</h2><p>Qronon is an early-stage company. We value rigorous thinking, intellectual honesty and the ability to move from a research question to a real-world test.</p></div><div className="role-list"><a className="role-row role-row-link" href={`#/careers/${mlRole.slug}`}><span>01</span><div><h3>{mlRole.title}</h3><p>Weather forecasting, extreme-event prediction and production machine learning.</p></div><Icon name="arrow" size={21} /></a><div className="role-row"><span>02</span><div><h3>Forecasting & earth observation</h3><p>Atmospheric science, numerical weather prediction, satellite data and evaluation.</p></div><a href="mailto:info@qronon.ai"><Icon name="arrow" size={21} /></a></div><div className="role-row"><span>03</span><div><h3>Engineering & product</h3><p>Reliable model infrastructure, APIs and tools that bring forecasts into decisions.</p></div><a href="mailto:info@qronon.ai"><Icon name="arrow" size={21} /></a></div></div></section><section className="careers-footer"><div className="section-shell careers-footer-inner"><h2>Do not see your role?</h2><p>Tell us what you are working on and why it matters.</p><a className="text-link" href="mailto:info@qronon.ai">Introduce yourself <Icon name="arrow" size={17} /></a></div></section></main>;
+  return (
+    <main className="page-main">
+      <PageIntro
+        title="Work on the hardest prediction problems."
+        copy="We are building a small, research-led team across quantum machine learning, forecasting, earth observation and product engineering."
+      />
+
+      <section className="careers-section section-shell section-pad">
+        <div className="careers-intro">
+          <span className="section-label">Careers at Qronon</span>
+          <h2>
+            Bring depth.
+            <br />
+            Stay curious.
+          </h2>
+          <p>
+            Qronon is an early-stage company. We value rigorous thinking,
+            intellectual honesty and the ability to move from a research
+            question to a real-world test.
+          </p>
+        </div>
+
+        <div className="role-list">
+          <a
+            className="role-row role-row-link"
+            href={`#/careers/${mlRole.slug}`}
+          >
+            <span>01</span>
+            <div>
+              <h3>{mlRole.title}</h3>
+              <p>
+                Weather forecasting, extreme-event prediction and production
+                machine learning.
+              </p>
+            </div>
+            <Icon name="arrow" size={21} />
+          </a>
+
+          <div className="role-row">
+            <span>02</span>
+            <div>
+              <h3>Forecasting &amp; earth observation</h3>
+              <p>
+                Atmospheric science, numerical weather prediction, satellite
+                data and evaluation.
+              </p>
+            </div>
+            <a href="mailto:info@qronon.ai">
+              <Icon name="arrow" size={21} />
+            </a>
+          </div>
+
+          <div className="role-row">
+            <span>03</span>
+            <div>
+              <h3>Engineering &amp; product</h3>
+              <p>
+                Reliable model infrastructure, APIs and tools that bring
+                forecasts into decisions.
+              </p>
+            </div>
+            <a href="mailto:info@qronon.ai">
+              <Icon name="arrow" size={21} />
+            </a>
+          </div>
+
+          <div className="role-row">
+            <span>04</span>
+            <div>
+              <h3>Quantum application scientist</h3>
+              <p>
+                High-dimensional problems, quantum algorithms and applied
+                quantum machine learning.
+              </p>
+            </div>
+            <a href="mailto:info@qronon.ai">
+              <Icon name="arrow" size={21} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="careers-footer">
+        <div className="section-shell careers-footer-inner">
+          <h2>Do not see your role?</h2>
+          <p>Tell us what you are working on and why it matters.</p>
+          <a className="text-link" href="mailto:info@qronon.ai">
+            Introduce yourself <Icon name="arrow" size={17} />
+          </a>
+        </div>
+      </section>
+    </main>
+  );
 }
 
 function JobList({ items }) {
