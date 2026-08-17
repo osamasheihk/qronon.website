@@ -333,9 +333,9 @@ function JobDetail() {
       </aside>
       <div className="job-body">
         <JobSection title="About the job">
-          <p>We are looking for a Machine Learning Engineer / Researcher to help develop and implement novel machine learning approaches for weather forecasting and extreme-event prediction.</p>
-          <p>You will work with large datasets including weather forecasts, reanalysis data, satellite imagery and real-time time-series data. The role spans the full machine learning workflow, from data engineering and model development to validation and implementation.</p>
-          <p>As an early technical hire, you will work with the entire Qronon team to deliver a product across data engineering, machine learning, validation and implementation. You will help build the solution directly and have opportunities to engage with open-source contributors.</p>
+        <p>We are looking for a Machine Learning Engineer / Researcher to help develop and implement novel machine learning approaches for weather forecasting, extreme-event prediction and energy applications.</p>
+        <p>You will work with large, high-dimensional and spatiotemporal datasets, including weather forecasts, reanalysis data, satellite imagery and real-time time-series data. The role spans the full machine learning workflow, from data engineering and model development to rigorous validation, deployment and improvement using evidence from real-world operation.</p>
+        <p>As an early technical hire, you will work closely with the founders and wider Qronon team, taking significant ownership of machine learning development. You will run experiments, implement promising methods from the latest research, and help turn new forecasting approaches into reliable systems for real-world weather and energy applications.</p>
         </JobSection>
         <JobSection title="What you’ll work on"><JobList items={mlRole.responsibilities} /></JobSection>
         <JobSection title="About you">
@@ -345,8 +345,8 @@ function JobDetail() {
         <JobSection title="Beneficial skills"><JobList items={mlRole.beneficial} /></JobSection>
         <JobSection title="Benefits"><JobList items={mlRole.benefits} /></JobSection>
         <JobSection title="About Qronon">
-          <p>Qronon is a UK-based company developing quantum machine learning models for forecasting weather and extreme events,.</p>
-          <p>You will join a team of six. Qronon is supported by innovation funding from the UK Department for Science, Innovation and Technology.</p>
+        <p>Qronon is a UK-based deep-tech company developing quantum-enhanced predictive intelligence for complex systems, with an initial focus on weather and energy. Our technology combines advances in machine learning, quantum computing and nonlinear dynamics to build faster, more compute-efficient forecasting systems.</p>
+        <p>We are expanding our technical team and you will join at an early stage, working closely with the founders and taking significant ownership over Qronon’s machine learning development. Qronon is supported by innovation funding from the UK Department for Science, Innovation and Technology. You will have the opportunity to shape both the technology and how the team grows as we move from frontier research to real-world deployment.</p>
         </JobSection>
         <section className="job-inclusion"><h2>Bring your perspective.</h2><p>Studies show that applicants from diverse and historically under-represented backgrounds are less likely to apply unless they meet every listed qualification. At Qronon, we are looking for people who are genuinely passionate about developing quantum-enhanced climate solutions, and we actively encourage applicants from all backgrounds. If you believe you have the potential to do well in this role and your values align with our mission, we encourage you to contact us.</p></section>
         <section className="job-apply"><h2>Interested in joining Qronon?</h2><p>We review applications on a rolling basis. Contact us at <a href={applicationEmail}>info@qronon.ai</a>.</p></section>
