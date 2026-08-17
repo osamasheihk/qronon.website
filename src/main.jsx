@@ -427,11 +427,11 @@ function JobDetail() {
         <JobSection title="About the job">
         <p>We are looking for a Machine Learning Engineer / Researcher to develop and implement novel machine learning approaches for weather forecasting, extreme-event prediction and energy applications, as part of a project funded by the Advanced Research + Invention Agency (ARIA).</p>
         <p>You will work with large, high-dimensional and spatiotemporal datasets, including weather forecasts, reanalysis data, satellite imagery and real-time time-series data. The role spans the full machine learning workflow, from data engineering and model development to rigorous validation, deployment and improvement using evidence from real-world operation.</p>
-        <p>As an early technical hire, you will work closely with the founders and wider Qronon team, taking significant ownership of machine learning development. You will run experiments, implement promising methods from the latest research, and help turn new forecasting approaches into reliable systems for real-world weather and energy applications.</p>
+        <p>As an early technical hire, you will work closely with the founders and wider Qronon team, taking significant ownership of machine learning development. You will run numerical experiments, implement promising methods from the latest research, and help turn new forecasting approaches into reliable systems for real-world weather and energy applications.</p>
         </JobSection>
         <JobSection title="What you’ll work on"><JobList items={mlRole.responsibilities} /></JobSection>
         <JobSection title="About you">
-          <p>A PhD, or a Master's degree with relevant experience, in machine learning, applied mathematics, statistics, atmospheric science, physics, computer science or a related field. We value strong research ability, technical depth and a track record of excellent work.</p>
+          <p>A PhD, or a Master's degree with relevant experience, in machine learning, applied mathematics, statistics, atmospheric science, physics, computer science, engineering or a related field. We value strong research ability, technical depth and a track record of excellent work.</p>
           <JobList items={mlRole.qualifications} />
         </JobSection>
         <JobSection title="Beneficial skills"><JobList items={mlRole.beneficial} /></JobSection>
