@@ -431,7 +431,7 @@ function JobDetail() {
         </JobSection>
         <JobSection title="What you’ll work on"><JobList items={mlRole.responsibilities} /></JobSection>
         <JobSection title="About you">
-          <p>A PhD in machine learning, applied mathematics, statistics, atmospheric science, physics, computer science or a related field would be valuable, but it is not mandatory. We care more about research ability, technical depth and evidence of excellent work than a particular credential.</p>
+          <p>A PhD, or a Master's degree with relevant experience, in machine learning, applied mathematics, statistics, atmospheric science, physics, computer science or a related field. We value strong research ability, technical depth and a track record of excellent work.</p>
           <JobList items={mlRole.qualifications} />
         </JobSection>
         <JobSection title="Beneficial skills"><JobList items={mlRole.beneficial} /></JobSection>
