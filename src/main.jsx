@@ -30,7 +30,7 @@ function navigate(path) {
 }
 
 function Wordmark() {
-  return <img src={`${import.meta.env.BASE_URL}qronon-logo.png`} alt="Qronon" width="1000" height="355" />;
+  return <img src={`${import.meta.env.BASE_URL}qronon-logo.svg`} alt="Qronon" width="1000" height="355" />;
 }
 
 function Header({ menuOpen, setMenuOpen }) {
