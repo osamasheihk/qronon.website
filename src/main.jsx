@@ -1,17 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
-import { mlRole } from './content/jobs.js';
+import jobs from './content/jobs.js';
 import { applications } from './content/applications.js';
 import { research } from './content/research.js';
+import { appendPoint, chooseAttractor, createTrail, integrate, SIMULATION_SPEED, TRAIL_CAPACITY } from './attractors.js';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mrbrwbnj';
+const featuredRole = jobs[0];
 
 function Icon({ name, size = 24 }) {
   const common = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.35, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true };
   if (name === 'arrow') return <svg {...common}><path d="M4 12h15" /><path d="m13 6 6 6-6 6" /></svg>;
   if (name === 'menu') return <svg {...common}><path d="M4 7h16M4 12h16M4 17h16" /></svg>;
   if (name === 'close') return <svg {...common}><path d="m6 6 12 12M18 6 6 18" /></svg>;
+  if (name === 'moon') return <svg {...common}><path d="M20 15.3A8.5 8.5 0 0 1 8.7 4 8.5 8.5 0 1 0 20 15.3Z" /></svg>;
+  if (name === 'sun') return <svg {...common}><circle cx="12" cy="12" r="3.5" /><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4" /></svg>;
   if (name === 'cloud') return <svg {...common}><path d="M6.8 17.3h9.9a3.7 3.7 0 0 0 .7-7.33A5.5 5.5 0 0 0 7 8.65a4.4 4.4 0 0 0-.2 8.65Z" /><path d="M8 20.2h.01M12 20.2h.01M16 20.2h.01" /></svg>;
   if (name === 'globe') return <svg {...common}><circle cx="12" cy="12" r="8.5" /><path d="M3.8 9h16.4M3.8 15h16.4M12 3.5c2.2 2.3 3.25 5.1 3.25 8.5S14.2 18.2 12 20.5C9.8 18.2 8.75 15.4 8.75 12S9.8 5.8 12 3.5Z" /></svg>;
   if (name === 'grid') return <svg {...common}><path d="M12 3v18M3 12h18" /><path d="m7 7 5 5 5-5M7 17l5-5 5 5" /><circle cx="12" cy="12" r="1.3" /></svg>;
@@ -29,11 +33,12 @@ function navigate(path) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-function Wordmark() {
-  return <img src={`${import.meta.env.BASE_URL}qronon-logo.svg`} alt="Qronon" width="1000" height="355" />;
+function Wordmark({ darkMode }) {
+  const logo = darkMode ? 'qronon-logo-white.svg' : 'qronon-logo.svg';
+  return <img src={`${import.meta.env.BASE_URL}${logo}`} alt="Qronon" width="1000" height="355" />;
 }
 
-function Header({ menuOpen, setMenuOpen }) {
+function Header({ darkMode, menuOpen, setDarkMode, setMenuOpen }) {
   const links = [
     ['Home', '#/'],
     ['Applications', '#/applications'],
@@ -43,10 +48,18 @@ function Header({ menuOpen, setMenuOpen }) {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a className="wordmark" href="#/" onClick={() => setMenuOpen(false)} aria-label="Qronon home"><Wordmark /></a>
+        <a className="wordmark" href="#/" onClick={() => setMenuOpen(false)} aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a>
         <nav className={menuOpen ? 'main-nav is-open' : 'main-nav'} aria-label="Main navigation">
           {links.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
         </nav>
+        <button
+          className="theme-button"
+          onClick={() => setDarkMode((enabled) => !enabled)}
+          aria-label={darkMode ? 'Use light mode' : 'Use dark mode'}
+          title={darkMode ? 'Use light mode' : 'Use dark mode'}
+        >
+          <Icon name={darkMode ? 'sun' : 'moon'} size={20} />
+        </button>
         <button className="menu-button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
           <Icon name={menuOpen ? 'close' : 'menu'} size={24} />
         </button>
@@ -55,59 +68,17 @@ function Header({ menuOpen, setMenuOpen }) {
   );
 }
 
-const LORENZ = { sigma: 10, rho: 28, beta: 8 / 3, step: 0.006 };
-const TRAIL_CAPACITY = 1100;
-
-function createTrail() {
-  return { points: new Float32Array(TRAIL_CAPACITY * 3), head: 0, count: 0 };
-}
-
-function appendPoint(trail, state) {
-  const offset = trail.head * 3;
-  trail.points[offset] = state.x;
-  trail.points[offset + 1] = state.y;
-  trail.points[offset + 2] = state.z;
-  trail.head = (trail.head + 1) % TRAIL_CAPACITY;
-  trail.count = Math.min(trail.count + 1, TRAIL_CAPACITY);
-}
-
-function integrateLorenz(state) {
-  const { sigma, rho, beta, step } = LORENZ;
-  const halfStep = step / 2;
-  const k1x = sigma * (state.y - state.x);
-  const k1y = state.x * (rho - state.z) - state.y;
-  const k1z = state.x * state.y - beta * state.z;
-  const x2 = state.x + k1x * halfStep;
-  const y2 = state.y + k1y * halfStep;
-  const z2 = state.z + k1z * halfStep;
-  const k2x = sigma * (y2 - x2);
-  const k2y = x2 * (rho - z2) - y2;
-  const k2z = x2 * y2 - beta * z2;
-  const x3 = state.x + k2x * halfStep;
-  const y3 = state.y + k2y * halfStep;
-  const z3 = state.z + k2z * halfStep;
-  const k3x = sigma * (y3 - x3);
-  const k3y = x3 * (rho - z3) - y3;
-  const k3z = x3 * y3 - beta * z3;
-  const x4 = state.x + k3x * step;
-  const y4 = state.y + k3y * step;
-  const z4 = state.z + k3z * step;
-  const k4x = sigma * (y4 - x4);
-  const k4y = x4 * (rho - z4) - y4;
-  const k4z = x4 * y4 - beta * z4;
-  state.x += (k1x + 2 * k2x + 2 * k3x + k4x) * step / 6;
-  state.y += (k1y + 2 * k2y + 2 * k3y + k4y) * step / 6;
-  state.z += (k1z + 2 * k2z + 2 * k3z + k4z) * step / 6;
-}
-
 function SystemVisual({ compact = false }) {
   const canvasRef = useRef(null);
+  const attractorRef = useRef(null);
+  if (!attractorRef.current) attractorRef.current = chooseAttractor();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const primary = { x: 0.1, y: 0, z: 0 };
+    const attractor = attractorRef.current;
+    const primary = { ...attractor.initial };
     const primaryTrail = createTrail();
     let frameId;
     let isVisible = true;
@@ -116,14 +87,14 @@ function SystemVisual({ compact = false }) {
 
     const advance = (steps) => {
       for (let index = 0; index < steps; index += 1) {
-        integrateLorenz(primary);
+        integrate(primary, attractor);
         appendPoint(primaryTrail, primary);
       }
     };
 
     // Move the state onto the attractor before the first painted frame.
-    for (let index = 0; index < 1250; index += 1) {
-      integrateLorenz(primary);
+    for (let index = 0; index < (attractor.warmup || 1250); index += 1) {
+      integrate(primary, attractor);
     }
     advance(TRAIL_CAPACITY);
 
@@ -134,10 +105,16 @@ function SystemVisual({ compact = false }) {
       const x = trail.points[offset];
       const y = trail.points[offset + 1];
       const z = trail.points[offset + 2];
-      const scale = Math.min(width / 69, height / 58);
+      const { scaleX, scaleY, baseline, xoffset = 0.51, yaw, pitch, focalLength } = attractor.projection;
+      const scale = Math.min(width / scaleX, height / scaleY);
+      const yawX = x * Math.cos(yaw) - y * Math.sin(yaw);
+      const depth = x * Math.sin(yaw) + y * Math.cos(yaw);
+      const vertical = z * Math.cos(pitch) - depth * Math.sin(pitch);
+      const cameraDepth = depth * Math.cos(pitch) + z * Math.sin(pitch);
+      const perspective = Math.max(0.7, Math.min(1.3, focalLength / (focalLength + cameraDepth)));
       return {
-        x: width * 0.51 + (x * 0.91 + y * 0.12) * scale,
-        y: height * 0.91 - z * scale,
+        x: width * xoffset + yawX * scale * perspective,
+        y: height * baseline - vertical * scale * perspective,
       };
     };
 
@@ -161,12 +138,12 @@ function SystemVisual({ compact = false }) {
     const paint = () => {
       context.clearRect(0, 0, width, height);
       strokeTrail(primaryTrail, 'rgba(33, 92, 255, .13)', compact ? 0.9 : 1.05);
-      strokeTrail(primaryTrail, 'rgba(33, 92, 255, .96)', compact ? 1.25 : 1.7, 0.42);
+      strokeTrail(primaryTrail, 'rgba(33, 92, 255, .96)', compact ? 1.2 : 1.6, 0.58);
     };
 
     const animate = () => {
       if (isVisible && !document.hidden && !reducedMotion.matches) {
-        advance(compact ? 2 : 3);
+        advance(compact ? SIMULATION_SPEED.compact : SIMULATION_SPEED.full);
         paint();
       }
       frameId = window.requestAnimationFrame(animate);
@@ -198,7 +175,7 @@ function SystemVisual({ compact = false }) {
   }, [compact]);
 
   return (
-    <figure className={compact ? 'system-visual compact' : 'system-visual'} aria-label="A live chaotic-system trajectory">
+    <figure className={compact ? 'system-visual compact' : 'system-visual'} aria-label={`A live ${attractorRef.current.name} chaotic-system trajectory`}>
       <canvas className="chaos-canvas" ref={canvasRef} aria-hidden="true" />
     </figure>
   );
@@ -325,23 +302,20 @@ function Careers() {
             Stay curious.
           </h2>
           <p>
-            Qronon is an early-stage company. We value rigorous thinking,
-            intellectual honesty and the ability to move from a research
-            question to a real-world test.
+            At Qronon, we value rigorous thinking, intellectual honesty and the ability to move from a research question to a real-world test.
           </p>
         </div>
 
         <div className="role-list">
           <a
             className="role-row role-row-link"
-            href={`#/careers/${mlRole.slug}`}
+            href={`#/careers/${featuredRole.slug}`}
           >
             <span>01</span>
             <div>
-              <h3>{mlRole.title}</h3>
+              <h3>{featuredRole.title}</h3>
               <p>
-                Weather forecasting, extreme-event prediction and production
-                machine learning.
+                {featuredRole.summary_blurb}
               </p>
             </div>
             <Icon name="arrow" size={21} />
@@ -349,6 +323,20 @@ function Careers() {
 
           <div className="role-row">
             <span>02</span>
+            <div>
+              <h3>Quantum application scientist</h3>
+              <p>
+                High-dimensional problems, quantum algorithms and applied
+                quantum machine learning.
+              </p>
+            </div>
+            <a href="mailto:info@qronon.ai">
+              <Icon name="arrow" size={21} />
+            </a>
+          </div>
+          
+          {/* <div className="role-row">
+            <span>03</span>
             <div>
               <h3>Forecasting &amp; earth observation</h3>
               <p>
@@ -362,7 +350,7 @@ function Careers() {
           </div>
 
           <div className="role-row">
-            <span>03</span>
+            <span>04</span>
             <div>
               <h3>Engineering &amp; product</h3>
               <p>
@@ -373,21 +361,7 @@ function Careers() {
             <a href="mailto:info@qronon.ai">
               <Icon name="arrow" size={21} />
             </a>
-          </div>
-
-          <div className="role-row">
-            <span>04</span>
-            <div>
-              <h3>Quantum application scientist</h3>
-              <p>
-                High-dimensional problems, quantum algorithms and applied
-                quantum machine learning.
-              </p>
-            </div>
-            <a href="mailto:info@qronon.ai">
-              <Icon name="arrow" size={21} />
-            </a>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -395,8 +369,7 @@ function Careers() {
         <div className="section-shell careers-footer-inner">
           <h2>Do not see your role?</h2>
           <p>Tell us what you are working on and why it matters.</p>
-          <a className="text-link" href="mailto:info@qronon.ai">
-            Introduce yourself <Icon name="arrow" size={17} />
+          <a className="text-link" href="mailto:info@qronon.ai">  Introduce yourself <Icon name="arrow" size={17} />
           </a>
         </div>
       </section>
@@ -412,35 +385,28 @@ function JobSection({ title, children }) {
   return <section className="job-section"><h2>{title}</h2>{children}</section>;
 }
 
-function JobDetail() {
-  const applicationEmail = 'mailto:info@qronon.ai?subject=Machine%20Learning%20Engineer%20%2F%20Researcher';
+function JobDetail({ role }) {
+  const applicationEmail = `mailto:info@qronon.ai?subject=${encodeURIComponent(role.title)}`;
 
   return <main className="page-main job-page">
-    <PageIntro title={mlRole.title} copy={`${mlRole.location} · ${mlRole.employmentType} · Applications reviewed on a rolling basis.`} />
+    <PageIntro title={role.title} copy={`${role.location} · ${role.employmentType} · Applications reviewed on a rolling basis.`} />
     <section className="job-layout section-shell section-pad">
       <aside className="job-sidebar">
         <span className="section-label">Role details</span>
-        <dl className="job-facts"><div><dt>Location</dt><dd>{mlRole.location}</dd></div><div><dt>Employment</dt><dd>{mlRole.employmentType}</dd></div><div><dt>Right to work</dt><dd>{mlRole.rightToWork}</dd></div></dl>
+        <dl className="job-facts"><div><dt>Location</dt><dd>{role.location}</dd></div><div><dt>Employment</dt><dd>{role.employmentType}</dd></div><div><dt>Right to work</dt><dd>{role.rightToWork}</dd></div></dl>
         <p className="job-apply-note">Interested in the role? Contact <a href={applicationEmail}>info@qronon.ai</a>.</p>
       </aside>
       <div className="job-body">
-        <JobSection title="About the job">
-        <p>We are looking for a Machine Learning Engineer / Researcher to develop and implement novel machine learning approaches for weather forecasting, extreme-event prediction and energy applications, as part of a project funded by the Advanced Research + Invention Agency (ARIA).</p>
-        <p>You will work with large, high-dimensional and spatiotemporal datasets, including weather forecasts, reanalysis data, satellite imagery and real-time time-series data. The role spans the full machine learning workflow, from data engineering and model development to rigorous validation, deployment and improvement using evidence from real-world operation.</p>
-        <p>As an early technical hire, you will work closely with the founders and wider Qronon team, taking significant ownership of machine learning development. You will run numerical experiments, implement promising methods from the latest research, and help turn new forecasting approaches into reliable systems for real-world weather and energy applications.</p>
-        </JobSection>
-        <JobSection title="What you’ll work on"><JobList items={mlRole.responsibilities} /></JobSection>
+        <JobSection title="About the job">{role.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</JobSection>
+        <JobSection title="What you’ll work on"><JobList items={role.responsibilities} /></JobSection>
         <JobSection title="About you">
-          <p>A PhD, or a Master's degree with relevant experience, in machine learning, applied mathematics, statistics, atmospheric science, physics, computer science, engineering or a related field. We value strong research ability, technical depth and a track record of excellent work.</p>
-          <JobList items={mlRole.qualifications} />
+          {role.aboutYou.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          <JobList items={role.qualifications} />
         </JobSection>
-        <JobSection title="Beneficial skills"><JobList items={mlRole.beneficial} /></JobSection>
-        <JobSection title="Benefits"><JobList items={mlRole.benefits} /></JobSection>
-        <JobSection title="About Qronon">
-        <p>Qronon is a UK-based deep-tech company developing quantum-enhanced predictive intelligence for complex systems, with an initial focus on weather and energy. Our technology combines advances in machine learning, quantum computing and nonlinear dynamics to build faster, more compute-efficient forecasting systems.</p>
-        <p>We are expanding our technical team and you will join at an early stage, working closely with the founders and taking significant ownership over Qronon’s machine learning development. Qronon is supported by innovation funding from the UK Department for Science, Innovation and Technology. You will have the opportunity to shape both the technology and how the team grows as we move from frontier research to real-world deployment.</p>
-        </JobSection>
-        <section className="job-inclusion"><h2>Bring your perspective.</h2><p>Studies show that applicants from diverse and historically under-represented backgrounds are less likely to apply unless they meet every listed qualification. At Qronon, we are looking for people who are genuinely passionate about developing quantum-enhanced climate solutions, and we actively encourage applicants from all backgrounds. If you believe you have the potential to do well in this role and your values align with our mission, we encourage you to contact us.</p></section>
+        <JobSection title="Beneficial skills"><JobList items={role.beneficial} /></JobSection>
+        <JobSection title="Benefits"><JobList items={role.benefits} /></JobSection>
+        <JobSection title="About Qronon">{role.company.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</JobSection>
+        <section className="job-inclusion"><h2>Bring your perspective.</h2><p>{role.inclusion}</p></section>
         <section className="job-apply"><h2>Interested in joining Qronon?</h2><p>We review applications on a rolling basis. Contact us at <a href={applicationEmail}>info@qronon.ai</a>.</p></section>
       </div>
     </section>
@@ -473,14 +439,23 @@ function Contact() {
   return <main className="page-main"><PageIntro title="Build the next forecast with us." copy="Talk to Qronon about pilot design, research collaborations, validation context or joining the team." /><section className="contact-section section-shell section-pad"><div className="contact-copy"><span className="section-label">Start a conversation</span><h2>One good question is enough to begin.</h2><p>Tell us what you are trying to predict, what decisions depend on it and where your current system reaches its limits.</p><div className="contact-links"><a href="mailto:info@qronon.ai">info@qronon.ai <Icon name="arrow" size={16} /></a></div></div><form className="contact-form" action={FORMSPREE_ENDPOINT} method="POST" onSubmit={handleSubmit}><input type="hidden" name="_subject" value="New Qronon website enquiry" /><label>Name<input name="name" autoComplete="name" placeholder="Your name" required /></label><label>Work email<input type="email" name="email" autoComplete="email" placeholder="you@company.com" required /></label><label>What would you like to discuss?<textarea name="message" rows="5" placeholder="A pilot, research, validation or a role..." required /></label><button className="button" type="submit" disabled={status === 'submitting'}>{status === 'submitting' ? 'Sending…' : 'Send enquiry'} <Icon name="arrow" size={17} /></button><div className="form-status" aria-live="polite">{status === 'success' && <p className="form-success">Thanks—your enquiry has been sent. We’ll be in touch.</p>}{status === 'error' && <p className="form-error">Something went wrong. Please try again or email info@qronon.ai.</p>}</div></form></section></main>;
 }
 
-function Footer() {
-  return <footer className="site-footer"><div className="section-shell footer-inner"><a className="wordmark" href="#/" aria-label="Qronon home"><Wordmark /></a><div className="footer-links"><a href="#/">Home</a><a href="#/applications">Applications</a><a href="#/careers">Careers</a><a href="#/contact">Contact</a></div><span className="copyright">© 2026 Qronon. All rights reserved.</span></div></footer>;
+function Footer({ darkMode }) {
+  return <footer className="site-footer"><div className="section-shell footer-inner"><a className="wordmark" href="#/" aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a><div className="footer-links"><a href="#/">Home</a><a href="#/applications">Applications</a><a href="#/careers">Careers</a><a href="#/contact">Contact</a></div><span className="copyright">© 2026 Qronon. All rights reserved.</span></div></footer>;
 }
 
 function App() {
   const [route, setRoute] = useState(window.location.hash || '#/');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = window.localStorage.getItem('qronon-theme');
+    return savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
   useEffect(() => { const handleHash = () => { setRoute(window.location.hash || '#/'); setMenuOpen(false); }; window.addEventListener('hashchange', handleHash); return () => window.removeEventListener('hashchange', handleHash); }, []);
+  useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
+    window.localStorage.setItem('qronon-theme', darkMode ? 'dark' : 'light');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', darkMode ? '#0b1220' : '#071737');
+  }, [darkMode]);
   const page = useMemo(() => {
     if (route === '#/' || route === '') return <Home />;
     if (route === '#/platform') return <Platform />;
@@ -488,12 +463,16 @@ function App() {
     if (route === '#/research') return <Research />;
     if (route === '#/about') return <About />;
     if (route === '#/careers') return <Careers />;
-    if (route === `#/careers/${mlRole.slug}`) return <JobDetail />;
+    if (route.startsWith('#/careers/')) {
+      const slug = route.slice('#/careers/'.length);
+      const role = jobs.find((job) => job.slug === slug);
+      return role ? <JobDetail role={role} /> : <Careers />;
+    }
     if (route === '#/contact') return <Contact />;
     if (route.startsWith('#/applications/')) { const slug = route.split('/')[2]; const app = applications.find((item) => item.slug === slug) || applications[0]; return <ApplicationDetail app={app} />; }
     return <Home />;
   }, [route]);
-  return <><Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />{page}<Footer /></>;
+  return <><Header darkMode={darkMode} menuOpen={menuOpen} setDarkMode={setDarkMode} setMenuOpen={setMenuOpen} />{page}<Footer darkMode={darkMode} /></>;
 }
 
 createRoot(document.getElementById('root')).render(<App />);
