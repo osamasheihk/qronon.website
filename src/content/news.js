@@ -18,7 +18,6 @@ const news = [
           '[CUDA-Q](https://developer.nvidia.com/cuda-q) provides the programming environment for the Qronon’s hybrid quantum-classical workflow, while cuQuantum enables GPU-accelerated quantum simulation. This allows Qronon to develop and scale quantum algorithms on accelerated computing infrastructure today, with a direct path towards execution on suitable physical quantum processors as the hardware matures.',
           '“Weather is a demanding test of any predictive model: accuracy matters, but so do uncertainty, scalability and the speed at which models can be developed and evaluated,” said Osama Ahmed, CEO of Qronon. “Using [NVIDIA CUDA-Q](https://developer.nvidia.com/cuda-toolkit) and cuQuantum on Isambard-AI gives us the infrastructure to test our approach at greater scale and understand where quantum-accelerated computing can contribute to practical forecasting.”',
         ],
-        image: { src: 'news/figure-1.png', alt: 'Representative global atmospheric temperature field', caption: 'A representative global atmospheric field used in Qronon’s weather forecasting research.' },
       },
       {
         heading: 'Scaling and performance',
@@ -29,7 +28,10 @@ const news = [
           'Initial evaluations across multiple locations show positive forecast skill relative to climatology, with improvements of approximately 5–10% across multi-day forecast horizons. Qronon is also testing the approach on extreme-weather conditions, where rare events can have disproportionate consequences for energy systems, infrastructure and insurance.',
           'A representative 10-day global forecast illustrates how the same architecture can be applied at substantially larger spatial scale, moving from reduced-order atmospheric models towards realistic global and local weather prediction workloads.',
         ],
-        image: { src: 'news/figure-2.png', alt: 'Runtime comparison between NVIDIA CUDA-Q and a reference quantum simulation', caption: 'Runtime comparison for the quantum-processing stage across forecast time-step workloads.' },
+        images: [
+          { src: 'news/figure-2.png', alt: 'Runtime comparison between NVIDIA CUDA-Q and a reference quantum simulation', caption: 'Runtime comparison for the quantum-processing stage across forecast time-step workloads.', afterParagraph: 2, size: 'small' },
+          { src: 'news/figure-1.png', alt: 'Representative global atmospheric temperature field', caption: 'A representative global atmospheric field used in Qronon’s weather forecasting research.', afterParagraph: 5 },
+        ],
       },
       {
         heading: 'A path towards practical quantum forecasting',

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 import jobs from './content/jobs.js';
@@ -329,8 +329,17 @@ function NewsArticle({ article }) {
         {article.sections.map((section, index) => (
           <section className="news-article-section" key={section.heading || `intro-${index}`}>
             {section.heading && <h2>{section.heading}</h2>}
-            {section.paragraphs.map((paragraph) => <p key={paragraph}><RichText text={paragraph} /></p>)}
-            {section.image && <figure className="news-figure"><img src={`${import.meta.env.BASE_URL}${section.image.src}`} alt={section.image.alt} /><figcaption>{section.image.caption}</figcaption></figure>}
+            {section.paragraphs.map((paragraph, paragraphIndex) => (
+              <Fragment key={paragraph}>
+                <p><RichText text={paragraph} /></p>
+                {section.images?.filter((image) => image.afterParagraph === paragraphIndex + 1).map((image) => (
+                  <figure className={`news-figure${image.size ? ` news-figure-${image.size}` : ''}`} key={image.src}>
+                    <img src={`${import.meta.env.BASE_URL}${image.src}`} alt={image.alt} />
+                    <figcaption>{image.caption}</figcaption>
+                  </figure>
+                ))}
+              </Fragment>
+            ))}
           </section>
         ))}
       </article>
