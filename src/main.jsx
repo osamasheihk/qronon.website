@@ -4,6 +4,7 @@ import './styles.css';
 import jobs from './content/jobs.js';
 import { applications } from './content/applications.js';
 import { research } from './content/research.js';
+import news from './content/news.js';
 import { appendPoint, chooseAttractor, createTrail, integrate, SIMULATION_SPEED, TRAIL_CAPACITY } from './attractors.js';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mrbrwbnj';
@@ -42,6 +43,7 @@ function Header({ darkMode, menuOpen, setDarkMode, setMenuOpen }) {
   const links = [
     ['Home', '#/'],
     ['Applications', '#/applications'],
+    ['News', '#/news'],
     ['Careers', '#/careers'],
     ['Contact', '#/contact'],
   ];
@@ -265,8 +267,8 @@ function ArchitectureStep({ number, title, children }) {
   return <div className="architecture-step"><span>{number}</span><h3>{title}</h3><p>{children}</p></div>;
 }
 
-function PageIntro({ title, copy, visual = false }) {
-  return <section className={visual ? 'page-intro with-visual' : 'page-intro'}><div className="section-shell page-intro-inner"><div><span className="section-label">Qronon</span><h1>{title}</h1><p>{copy}</p></div>{visual && <SystemVisual compact />}</div></section>;
+function PageIntro({ title, copy, visual = false, label = 'Qronon' }) {
+  return <section className={visual ? 'page-intro with-visual' : 'page-intro'}><div className="section-shell page-intro-inner"><div>{label && <span className="section-label">{label}</span>}<h1>{title}</h1>{copy && <p>{copy}</p>}</div>{visual && <SystemVisual compact />}</div></section>;
 }
 
 function Applications() {
@@ -283,6 +285,58 @@ function About() {
 
 function Research() {
   return <main className="page-main"><PageIntro title="Research that earns its way into the product." copy="Qronon’s research programme connects quantum-enhanced machine learning with the practical requirements of forecasting complex dynamics: stability, finite data, rare events and calibrated uncertainty." /><section className="research-list section-shell section-pad"><div className="research-lede"><span className="section-label">Selected work</span><h2>What the papers show.<br />Why it matters.</h2></div><div className="paper-list">{research.map((paper, index) => <a className="paper-row" href={paper.href} target="_blank" rel="noreferrer" key={paper.title}><span className="paper-number">0{index + 1}</span><span><h3>{paper.title}</h3><p>{paper.meta}</p></span><Icon name="arrow" size={21} /></a>)}</div></section><section className="research-method"><div className="section-shell method-inner"><div><span className="section-label">Validation</span><h2>Clear claim status.<br />Measurable forecast skill.</h2></div><div><p>Current results are presented with evidence status: internally demonstrated, under validation, partner validation or roadmap. We measure forecast skill, calibration, lead time and compute against a stated baseline.</p><a className="text-link" href="#/contact">Request validation context <Icon name="arrow" size={17} /></a></div></div></section></main>;
+}
+
+function News() {
+  return (
+    <main className="page-main">
+      <PageIntro title="News and updates" label="" />
+      <section className="news-list section-shell section-pad">
+        <div className="news-items">
+          {news.map((item) => (
+            <article className="news-item" key={`${item.date}-${item.title}`}>
+              <div className="news-meta"><span>{item.category}</span><time dateTime={item.date}>{new Date(`${item.date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</time></div>
+              <div className="news-copy"><h3>{item.title}</h3><a className="text-link" href={`#/news/${item.slug}`}>Read more <Icon name="arrow" size={17} /></a></div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <DarkCta />
+    </main>
+  );
+}
+
+function RichText({ text }) {
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, index) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (!match) return part;
+    return <a href={match[2]} target="_blank" rel="noreferrer" key={`${match[2]}-${index}`}>{match[1]}</a>;
+  });
+}
+
+function NewsArticle({ article }) {
+  return (
+    <main className="page-main news-article-page">
+      <section className="news-article-intro">
+        <div className="section-shell">
+          <a className="news-back-link" href="#/news">News and updates <Icon name="arrow" size={16} /></a>
+          <div className="news-article-meta"><span>{article.category}</span><time dateTime={article.date}>{new Date(`${article.date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></div>
+          <h1>{article.title}</h1>
+        </div>
+      </section>
+      <article className="news-article-body section-shell">
+        {article.sections.map((section, index) => (
+          <section className="news-article-section" key={section.heading || `intro-${index}`}>
+            {section.heading && <h2>{section.heading}</h2>}
+            {section.paragraphs.map((paragraph) => <p key={paragraph}><RichText text={paragraph} /></p>)}
+            {section.image && <figure className="news-figure"><img src={`${import.meta.env.BASE_URL}${section.image.src}`} alt={section.image.alt} /><figcaption>{section.image.caption}</figcaption></figure>}
+          </section>
+        ))}
+      </article>
+      <div className="section-shell news-article-footer"><a className="text-link" href="#/news">Back to news <Icon name="arrow" size={17} /></a></div>
+    </main>
+  );
 }
 
 function Careers() {
@@ -440,7 +494,7 @@ function Contact() {
 }
 
 function Footer({ darkMode }) {
-  return <footer className="site-footer"><div className="section-shell footer-inner"><a className="wordmark" href="#/" aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a><div className="footer-links"><a href="#/">Home</a><a href="#/applications">Applications</a><a href="#/careers">Careers</a><a href="#/contact">Contact</a></div><span className="copyright">© 2026 Qronon. All rights reserved.</span></div></footer>;
+  return <footer className="site-footer"><div className="section-shell footer-inner"><a className="wordmark" href="#/" aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a><div className="footer-links"><a href="#/">Home</a><a href="#/applications">Applications</a><a href="#/news">News</a><a href="#/careers">Careers</a><a href="#/contact">Contact</a></div><span className="copyright">© 2026 Qronon. All rights reserved.</span></div></footer>;
 }
 
 function App() {
@@ -461,6 +515,12 @@ function App() {
     if (route === '#/platform') return <Platform />;
     if (route === '#/applications') return <Applications />;
     if (route === '#/research') return <Research />;
+    if (route === '#/news') return <News />;
+    if (route.startsWith('#/news/')) {
+      const slug = route.slice('#/news/'.length);
+      const article = news.find((item) => item.slug === slug);
+      return article?.sections ? <NewsArticle article={article} /> : <News />;
+    }
     if (route === '#/about') return <About />;
     if (route === '#/careers') return <Careers />;
     if (route.startsWith('#/careers/')) {

@@ -11,9 +11,6 @@ const jobs = [
     'You will work with large, high-dimensional and spatiotemporal datasets, including weather forecasts, reanalysis data, satellite imagery and real-time time-series data. The role spans the full machine learning workflow, from data engineering and model development to rigorous validation, deployment and improvement using evidence from real-world operation.',
     'As an early technical hire, you will work closely with the founders and wider Qronon team, taking significant ownership of machine learning development. You will run numerical experiments, implement promising methods from the latest research, and help turn new forecasting approaches into reliable systems for real-world weather and energy applications.',
   ],
-  aboutYou: [
-    'A PhD, or a Master’s degree with relevant experience, in machine learning, applied mathematics, statistics, atmospheric science, physics, computer science, engineering or a related field. We value strong research ability, technical depth and a track record of excellent work.',
-  ],
   company: [
     'Qronon is a UK-based deep-tech company developing quantum-enhanced predictive intelligence for complex systems, with an initial focus on weather and energy. Our technology combines advances in machine learning, quantum computing and nonlinear dynamics to build faster, more compute-efficient forecasting systems.',
     'We are expanding our technical team and you will join at an early stage, working closely with the founders and taking significant ownership over Qronon’s machine learning development. Qronon is supported by innovation funding from the UK Department for Science, Innovation and Technology. You will have the opportunity to shape both the technology and how the team grows as we move from frontier research to real-world deployment.',
@@ -26,6 +23,9 @@ const jobs = [
     'Deploy models in live environments and improve them using evidence from real-world operation.',
     'Help architect high-volume data pipelines and collect data alongside the data team.',
     'Help solve forecasting and optimisation problems across energy and other weather-sensitive sectors.',
+  ],
+  aboutYou: [
+    'A PhD, or a Master’s degree with relevant experience, in machine learning, applied mathematics, statistics, atmospheric science, physics, computer science, engineering or a related field. We value strong research ability, technical depth and a track record of excellent work.',
   ],
   qualifications: [
   'Strong foundations in machine learning, including modern deep-learning architectures and training methods.',
