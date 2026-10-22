@@ -48,6 +48,33 @@ const news = [
       },
     ],
   },
+    {
+    slug: 'qronon-receives-aria-funding-quantum-machine-intelligence-earth-systems',
+    date: '2026-10-20',
+    category: 'Funding',
+    title: 'Qronon receives ARIA funding to advance quantum machine intelligence for Earth systems',
+    dek: 'The research will explore longer-range weather forecasting and identify where additional observations could most improve predictions.',
+    sections: [
+      {
+        paragraphs: [
+          'Qronon has received funding from the Advanced Research and Invention Agency (ARIA) for **Towards Quantum Machine Intelligence for Earth Systems Modelling**, a project within ARIA’s Resilient Climate and Ecosystems Opportunity Seeds portfolio.',
+          'The research will develop probabilistic global weather forecasts at 15–45-day horizons, investigating how uncertainty grows through the atmosphere and how additional atmospheric, ocean and airborne observations affect forecast skill. A key output will be **value-of-information maps**, identifying where new observations could provide the greatest forecasting benefit.',
+          'For organisations exposed to weather risk, earlier warning is valuable only when the uncertainty around a forecast is meaningful. Qronon’s research focuses on understanding both the evolution of complex physical systems and the confidence that can be placed in their predicted behaviour. Potential applications include planning renewable-energy operations, assessing insurance risk and preparing for extreme weather.',
+          'The project connects two questions often considered separately: how can we improve a forecast, and what information would help us improve it further? By evaluating the contribution of different observations, the research aims to inform more targeted approaches to measuring and predicting the Earth system.',
+          'Qronon combines quantum computing methods with classical machine learning to investigate new approaches to modelling nonlinear dynamics. The work will examine how these approaches can support useful probabilistic predictions while addressing computational efficiency. Forecast quality, uncertainty and resource requirements will be central to evaluating their practical value.',
+          'ARIA’s Opportunity Seeds support ambitious, early-stage research into new scientific and technological possibilities. Within Resilient Climate and Ecosystems, this includes exploring approaches to climate adaptation and resilience, with extreme-weather forecasting among the areas of interest.',
+          'For Qronon, the award supports its wider ambition to develop predictive models for complex physical systems, beginning with weather and extending towards applications across climate risk, energy and resilience.',
+          '[Read the project announcement on ARIA’s website](https://aria.org.uk/opportunity-spaces/resilient-climate-and-ecosystems/opportunity-seeds?cardId=quantum-machine-intelligence-earth-systems).',
+        ],
+      },
+      {
+        heading: 'About Qronon',
+        paragraphs: [
+          'Qronon develops predictive models for complex physical systems by combining quantum computing methods with classical machine learning. Starting with weather forecasting, its research focuses on nonlinear dynamics, uncertainty and computational efficiency.',
+        ],
+      },
+    ],
+  }
 ];
 
 export default news;

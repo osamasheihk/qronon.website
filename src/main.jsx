@@ -307,11 +307,15 @@ function News() {
 }
 
 function RichText({ text }) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
   return parts.map((part, index) => {
     const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-    if (!match) return part;
-    return <a href={match[2]} target="_blank" rel="noreferrer" key={`${match[2]}-${index}`}>{match[1]}</a>;
+    if (match) {
+      return <a href={match[2]} target="_blank" rel="noreferrer" key={`${match[2]}-${index}`}>{match[1]}</a>;
+    }
+    const boldMatch = part.match(/^\*\*([^*]+)\*\*$/);
+    if (boldMatch) return <strong key={`bold-${index}`}>{boldMatch[1]}</strong>;
+    return part;
   });
 }
 
@@ -323,6 +327,7 @@ function NewsArticle({ article }) {
           <a className="news-back-link" href="#/news">News and updates <Icon name="arrow" size={16} /></a>
           <div className="news-article-meta"><span>{article.category}</span><time dateTime={article.date}>{new Date(`${article.date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></div>
           <h1>{article.title}</h1>
+          {article.dek && <p className="news-article-recap">{article.dek}</p>}
         </div>
       </section>
       <article className="news-article-body section-shell">
