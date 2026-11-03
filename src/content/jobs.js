@@ -48,7 +48,7 @@ const jobs = [
   'Publishing high-quality research, contributing to strong open-source projects, or communicating technical work publicly.',
 ],
   benefits: [
-    'Competitive salary, based on experience.',
+    '£40,000 - £70,000 based on experience.',
     'Share options as part of the compensation package.',
     'Flexible hours.',
     'Autonomy in how you deliver your work.',
