@@ -29,11 +29,6 @@ function Icon({ name, size = 24 }) {
   return <svg {...common}><circle cx="12" cy="12" r="8" /></svg>;
 }
 
-function navigate(path) {
-  window.location.hash = path;
-  window.scrollTo({ top: 0, behavior: 'instant' });
-}
-
 function Wordmark({ darkMode }) {
   const logo = darkMode ? 'qronon-logo-white.svg' : 'qronon-logo.svg';
   return <img src={`${import.meta.env.BASE_URL}${logo}`} alt="Qronon" width="1000" height="355" />;
@@ -41,16 +36,16 @@ function Wordmark({ darkMode }) {
 
 function Header({ darkMode, menuOpen, setDarkMode, setMenuOpen }) {
   const links = [
-    ['Home', '#/'],
-    ['Applications', '#/applications'],
-    ['News', '#/news'],
-    ['Careers', '#/careers'],
-    ['Contact', '#/contact'],
+    ['Home', '/'],
+    ['Applications', '/applications'],
+    ['News', '/news'],
+    ['Careers', '/careers'],
+    ['Contact', '/contact'],
   ];
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a className="wordmark" href="#/" onClick={() => setMenuOpen(false)} aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a>
+        <a className="wordmark" href="/" onClick={() => setMenuOpen(false)} aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a>
         <nav className={menuOpen ? 'main-nav is-open' : 'main-nav'} aria-label="Main navigation">
           {links.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
         </nav>
@@ -187,7 +182,7 @@ function ContourLines({ dark = false }) {
   return <svg className={dark ? 'contours dark' : 'contours'} viewBox="0 0 800 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 67C82 15 109 80 178 48S286 20 342 53 441 84 507 51 616 9 800 57" /><path d="M0 82C83 30 115 95 184 63S291 35 349 68 448 99 514 66 623 24 800 72" /><path d="M0 52C80 0 103 65 172 33S281 5 335 38 435 69 500 36 609-6 800 42" /></svg>;
 }
 
-function ButtonLink({ children, href = '#/contact', light = false }) {
+function ButtonLink({ children, href = '/contact', light = false }) {
   return <a className={light ? 'button light' : 'button'} href={href}>{children}<Icon name="arrow" size={17} /></a>;
 }
 
@@ -197,7 +192,7 @@ function Home() {
       <div className="hero-copy">
         <h1>Predictive intelligence for complex systems.</h1>
         <p className="hero-lede">Qronon develops quantum-enhanced machine learning models that turn complex dynamics into earlier, more efficient and uncertainty-aware forecasts.</p>
-        <div className="hero-actions"><ButtonLink href="#/applications">Explore applications</ButtonLink><a className="text-link" href="#/careers">View careers <Icon name="arrow" size={17} /></a></div>
+        <div className="hero-actions"><ButtonLink href="/applications">Explore applications</ButtonLink><a className="text-link" href="/careers">View careers <Icon name="arrow" size={17} /></a></div>
         <p className="hero-note">Starting with weather and climate risk.</p>
       </div>
       <SystemVisual />
@@ -226,7 +221,7 @@ function Home() {
 
     <section className="evidence-band">
       <div className="section-shell evidence-inner">
-        <div className="evidence-copy"><h2>Rigorous research.<br />Real-world outcomes.</h2><p>We advance the science and validate in the real world. Our work is published, peer-reviewed and stress-tested across diverse environments.</p><a className="text-link" href="#/contact">Start a conversation <Icon name="arrow" size={17} /></a></div>
+        <div className="evidence-copy"><h2>Rigorous research.<br />Real-world outcomes.</h2><p>We advance the science and validate in the real world. Our work is published, peer-reviewed and stress-tested across diverse environments.</p><a className="text-link" href="/contact">Start a conversation <Icon name="arrow" size={17} /></a></div>
         <div className="evidence-items"><Evidence icon="book" title="Peer-reviewed research" /><Evidence icon="chart" title="Transparent methodology" /><Evidence icon="globe" title="Validated across domains" /></div>
       </div>
     </section>
@@ -246,19 +241,19 @@ function Evidence({ icon, title }) {
 function ApplicationsTeaser() {
   return <section className="applications-teaser section-shell" id="applications">
     <div><span className="section-label">Applications</span><h2>Forecasts built around the decision.</h2></div>
-    <div className="applications-teaser-copy"><p>Qronon begins where weather-linked uncertainty changes operations. Explore how the same predictive layer can support decisions across weather, climate risk, energy and resilience.</p><ButtonLink href="#/applications">Explore applications</ButtonLink></div>
+    <div className="applications-teaser-copy"><p>Qronon begins where weather-linked uncertainty changes operations. Explore how the same predictive layer can support decisions across weather, climate risk, energy and resilience.</p><ButtonLink href="/applications">Explore applications</ButtonLink></div>
   </section>;
 }
 
 function DarkCta() {
-  return <section className="dark-cta"><ContourLines dark /><div className="section-shell dark-cta-inner"><div><h2>Build the next<br />forecast with us.</h2><p>Partner with Qronon to solve the hardest prediction problems for a safer, more resilient future.</p></div><ButtonLink light href="#/contact">Start a conversation</ButtonLink></div></section>;
+  return <section className="dark-cta"><ContourLines dark /><div className="section-shell dark-cta-inner"><div><h2>Build the next<br />forecast with us.</h2><p>Partner with Qronon to solve the hardest prediction problems for a safer, more resilient future.</p></div><ButtonLink light href="/contact">Start a conversation</ButtonLink></div></section>;
 }
 
 function Platform() {
   return <main className="page-main">
     <PageIntro title="Predictive intelligence for systems that do not sit still." copy="Qronon is building a model layer for complex, nonlinear and chaotic systems—starting with weather and climate risk." />
     <section className="platform-architecture section-shell section-pad"><div className="architecture-heading"><span className="section-label">The platform</span><h2>From dynamics<br />to decisions.</h2><p>Our models are designed to preserve the structure of the system they learn. They turn difficult-to-forecast dynamics into outputs that can be measured, calibrated and integrated into the workflows that rely on them.</p></div><div className="architecture-steps"><ArchitectureStep number="01" title="Physical signals">Observations, reanalyses, earth observation and domain-specific time series.</ArchitectureStep><ArchitectureStep number="02" title="Quantum-enhanced dynamics">A high-dimensional encoding layer tuned for nonlinear complex systems.</ArchitectureStep><ArchitectureStep number="03" title="Calibrated ensembles">Fast scenario generation with uncertainty tracked as a first-class output.</ArchitectureStep><ArchitectureStep number="04" title="Decision signals">Thresholds, probability bands and API-ready outputs for operational teams.</ArchitectureStep></div></section>
-    <section className="platform-principles"><div className="section-shell principles-inner"><div><span className="section-label">Why it matters</span><h2>Forecasts should show their uncertainty—and earn their place in the workflow.</h2></div><div className="principle-copy"><p>Qronon is designed to run on classical infrastructure today while preserving a route toward future quantum acceleration.</p><p>It complements existing operational systems with a more efficient, uncertainty-aware layer for decisions where conditions change faster than the plan.</p><a className="text-link" href="#/research">See the evidence <Icon name="arrow" size={17} /></a></div></div></section>
+    <section className="platform-principles"><div className="section-shell principles-inner"><div><span className="section-label">Why it matters</span><h2>Forecasts should show their uncertainty—and earn their place in the workflow.</h2></div><div className="principle-copy"><p>Qronon is designed to run on classical infrastructure today while preserving a route toward future quantum acceleration.</p><p>It complements existing operational systems with a more efficient, uncertainty-aware layer for decisions where conditions change faster than the plan.</p><a className="text-link" href="/research">See the evidence <Icon name="arrow" size={17} /></a></div></div></section>
     <DarkCta />
   </main>;
 }
@@ -272,11 +267,11 @@ function PageIntro({ title, copy, visual = false, label = 'Qronon' }) {
 }
 
 function Applications() {
-  return <main className="page-main"><PageIntro title="Applications for a world that keeps changing." copy="Our first applications focus on weather-linked volatility—where earlier, more efficient and uncertainty-aware forecasts can change a decision." /><section className="application-overview section-shell section-pad"><div className="overview-lede"><span className="section-label">Applications</span><h2>Choose a decision.<br />Build the forecast around it.</h2><p>Qronon starts with one measurable operating problem: a variable, a geography, a lead-time target and an existing baseline. Each application is a route into the same underlying platform.</p></div><div className="application-detail-list">{applications.map((app, index) => <a className="application-detail-row" href={`#/applications/${app.slug}`} key={app.slug}><span className="row-number">0{index + 1}</span><span className="row-icon"><Icon name={app.icon} size={27} /></span><span><h3>{app.title}</h3><p>{app.description}</p></span><Icon name="arrow" size={22} /></a>)}</div></section><DarkCta /></main>;
+  return <main className="page-main"><PageIntro title="Applications for a world that keeps changing." copy="Our first applications focus on weather-linked volatility—where earlier, more efficient and uncertainty-aware forecasts can change a decision." />  <section className="application-overview section-shell section-pad"><div className="overview-lede"><span className="section-label">Applications</span><h2>Choose a decision.<br />Build the forecast around it.</h2><p>Qronon starts with one measurable operating problem: a variable, a geography, a lead-time target and an existing baseline. Each application is a route into the same underlying platform.</p></div><div className="application-detail-list">{applications.map((app, index) => <a className="application-detail-row" href={`/applications/${app.slug}`} key={app.slug}><span className="row-number">0{index + 1}</span><span className="row-icon"><Icon name={app.icon} size={27} /></span><span><h3>{app.title}</h3><p>{app.description}</p></span><Icon name="arrow" size={22} /></a>)}</div></section><DarkCta /></main>;
 }
 
 function ApplicationDetail({ app }) {
-  return <main className="page-main"><PageIntro title={app.title} copy={app.detail} visual /><section className="application-detail section-shell section-pad"><div className="detail-lede"><span className="section-label">Application pathway</span><h2>Turn uncertainty into a clearer operating decision.</h2><p>{app.description} A Qronon pilot defines the variables, region, forecast horizon and decision threshold before performance is measured.</p><ButtonLink href="#/contact">Discuss a pilot</ButtonLink></div><div className="outcome-list">{app.outcomes.map((outcome, index) => <div className="outcome" key={outcome}><span>0{index + 1}</span><h3>{outcome}</h3><Icon name="arrow" size={19} /></div>)}</div></section><section className="pilot-band"><div className="section-shell pilot-inner"><h2>Start with one decision loop.</h2><p>Define the geography, variables, lead-time target, baseline model and operational threshold. Then validate the forecast where it creates value.</p><a className="text-link" href="#/contact">Start a pilot discussion <Icon name="arrow" size={17} /></a></div></section></main>;
+  return <main className="page-main"><PageIntro title={app.title} copy={app.detail} visual /><section className="application-detail section-shell section-pad"><div className="detail-lede"><span className="section-label">Application pathway</span><h2>Turn uncertainty into a clearer operating decision.</h2><p>{app.description} A Qronon pilot defines the variables, region, forecast horizon and decision threshold before performance is measured.</p><ButtonLink href="/contact">Discuss a pilot</ButtonLink></div><div className="outcome-list">{app.outcomes.map((outcome, index) => <div className="outcome" key={outcome}><span>0{index + 1}</span><h3>{outcome}</h3><Icon name="arrow" size={19} /></div>)}</div></section><section className="pilot-band"><div className="section-shell pilot-inner"><h2>Start with one decision loop.</h2><p>Define the geography, variables, lead-time target, baseline model and operational threshold. Then validate the forecast where it creates value.</p><a className="text-link" href="/contact">Start a pilot discussion <Icon name="arrow" size={17} /></a></div></section></main>;
 }
 
 function About() {
@@ -284,7 +279,7 @@ function About() {
 }
 
 function Research() {
-  return <main className="page-main"><PageIntro title="Research that earns its way into the product." copy="Qronon’s research programme connects quantum-enhanced machine learning with the practical requirements of forecasting complex dynamics: stability, finite data, rare events and calibrated uncertainty." /><section className="research-list section-shell section-pad"><div className="research-lede"><span className="section-label">Selected work</span><h2>What the papers show.<br />Why it matters.</h2></div><div className="paper-list">{research.map((paper, index) => <a className="paper-row" href={paper.href} target="_blank" rel="noreferrer" key={paper.title}><span className="paper-number">0{index + 1}</span><span><h3>{paper.title}</h3><p>{paper.meta}</p></span><Icon name="arrow" size={21} /></a>)}</div></section><section className="research-method"><div className="section-shell method-inner"><div><span className="section-label">Validation</span><h2>Clear claim status.<br />Measurable forecast skill.</h2></div><div><p>Current results are presented with evidence status: internally demonstrated, under validation, partner validation or roadmap. We measure forecast skill, calibration, lead time and compute against a stated baseline.</p><a className="text-link" href="#/contact">Request validation context <Icon name="arrow" size={17} /></a></div></div></section></main>;
+  return <main className="page-main"><PageIntro title="Research that earns its way into the product." copy="Qronon’s research programme connects quantum-enhanced machine learning with the practical requirements of forecasting complex dynamics: stability, finite data, rare events and calibrated uncertainty." /><section className="research-list section-shell section-pad"><div className="research-lede"><span className="section-label">Selected work</span><h2>What the papers show.<br />Why it matters.</h2></div><div className="paper-list">{research.map((paper, index) => <a className="paper-row" href={paper.href} target="_blank" rel="noreferrer" key={paper.title}><span className="paper-number">0{index + 1}</span><span><h3>{paper.title}</h3><p>{paper.meta}</p></span><Icon name="arrow" size={21} /></a>)}</div></section><section className="research-method"><div className="section-shell method-inner"><div><span className="section-label">Validation</span><h2>Clear claim status.<br />Measurable forecast skill.</h2></div><div><p>Current results are presented with evidence status: internally demonstrated, under validation, partner validation or roadmap. We measure forecast skill, calibration, lead time and compute against a stated baseline.</p><a className="text-link" href="/contact">Request validation context <Icon name="arrow" size={17} /></a></div></div></section></main>;
 }
 
 function News() {
@@ -296,7 +291,7 @@ function News() {
           {news.map((item) => (
             <article className="news-item" key={`${item.date}-${item.title}`}>
               <div className="news-meta"><span>{item.category}</span><time dateTime={item.date}>{new Date(`${item.date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</time></div>
-              <div className="news-copy"><h3>{item.title}</h3><a className="text-link" href={`#/news/${item.slug}`}>Read more <Icon name="arrow" size={17} /></a></div>
+              <div className="news-copy"><h3>{item.title}</h3><a className="text-link" href={`/news/${item.slug}`}>Read more <Icon name="arrow" size={17} /></a></div>
             </article>
           ))}
         </div>
@@ -324,7 +319,7 @@ function NewsArticle({ article }) {
     <main className="page-main news-article-page">
       <section className="news-article-intro">
         <div className="section-shell">
-          <a className="news-back-link" href="#/news">News and updates <Icon name="arrow" size={16} /></a>
+          <a className="news-back-link" href="/news">News and updates <Icon name="arrow" size={16} /></a>
           <div className="news-article-meta"><span>{article.category}</span><time dateTime={article.date}>{new Date(`${article.date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></div>
           <h1>{article.title}</h1>
           {article.dek && <p className="news-article-recap">{article.dek}</p>}
@@ -348,7 +343,7 @@ function NewsArticle({ article }) {
           </section>
         ))}
       </article>
-      <div className="section-shell news-article-footer"><a className="text-link" href="#/news">Back to news <Icon name="arrow" size={17} /></a></div>
+      <div className="section-shell news-article-footer"><a className="text-link" href="/news">Back to news <Icon name="arrow" size={17} /></a></div>
     </main>
   );
 }
@@ -377,7 +372,7 @@ function Careers() {
         <div className="role-list">
           <a
             className="role-row role-row-link"
-            href={`#/careers/${featuredRole.slug}`}
+            href={`/careers/${featuredRole.slug}`}
           >
             <span>01</span>
             <div>
@@ -508,42 +503,41 @@ function Contact() {
 }
 
 function Footer({ darkMode }) {
-  return <footer className="site-footer"><div className="section-shell footer-inner"><a className="wordmark" href="#/" aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a><div className="footer-links"><a href="#/">Home</a><a href="#/applications">Applications</a><a href="#/news">News</a><a href="#/careers">Careers</a><a href="#/contact">Contact</a></div><span className="copyright">© 2026 Qronon. All rights reserved.</span></div></footer>;
+  return <footer className="site-footer"><div className="section-shell footer-inner"><a className="wordmark" href="/" aria-label="Qronon home"><Wordmark darkMode={darkMode} /></a><div className="footer-links"><a href="/">Home</a><a href="/applications">Applications</a><a href="/news">News</a><a href="/careers">Careers</a><a href="/contact">Contact</a></div><span className="copyright">© 2026 Qronon. All rights reserved.</span></div></footer>;
 }
 
 function App() {
-  const [route, setRoute] = useState(window.location.hash || '#/');
+  const [route, setRoute] = useState(window.location.pathname);
   const [menuOpen, setMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = window.localStorage.getItem('qronon-theme');
     return savedTheme ? savedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
-  useEffect(() => { const handleHash = () => { setRoute(window.location.hash || '#/'); setMenuOpen(false); }; window.addEventListener('hashchange', handleHash); return () => window.removeEventListener('hashchange', handleHash); }, []);
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
     window.localStorage.setItem('qronon-theme', darkMode ? 'dark' : 'light');
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', darkMode ? '#0b1220' : '#071737');
   }, [darkMode]);
   const page = useMemo(() => {
-    if (route === '#/' || route === '') return <Home />;
-    if (route === '#/platform') return <Platform />;
-    if (route === '#/applications') return <Applications />;
-    if (route === '#/research') return <Research />;
-    if (route === '#/news') return <News />;
-    if (route.startsWith('#/news/')) {
-      const slug = route.slice('#/news/'.length);
+    if (route === '/' || route === '') return <Home />;
+    if (route === '/platform') return <Platform />;
+    if (route === '/applications') return <Applications />;
+    if (route === '/research') return <Research />;
+    if (route === '/news') return <News />;
+    if (route.startsWith('/news/')) {
+      const slug = route.slice('/news/'.length);
       const article = news.find((item) => item.slug === slug);
       return article?.sections ? <NewsArticle article={article} /> : <News />;
     }
-    if (route === '#/about') return <About />;
-    if (route === '#/careers') return <Careers />;
-    if (route.startsWith('#/careers/')) {
-      const slug = route.slice('#/careers/'.length);
+    if (route === '/about') return <About />;
+    if (route === '/careers') return <Careers />;
+    if (route.startsWith('/careers/')) {
+      const slug = route.slice('/careers/'.length);
       const role = jobs.find((job) => job.slug === slug);
       return role ? <JobDetail role={role} /> : <Careers />;
     }
-    if (route === '#/contact') return <Contact />;
-    if (route.startsWith('#/applications/')) { const slug = route.split('/')[2]; const app = applications.find((item) => item.slug === slug) || applications[0]; return <ApplicationDetail app={app} />; }
+    if (route === '/contact') return <Contact />;
+    if (route.startsWith('/applications/')) { const slug = route.split('/')[2]; const app = applications.find((item) => item.slug === slug) || applications[0]; return <ApplicationDetail app={app} />; }
     return <Home />;
   }, [route]);
   return <><Header darkMode={darkMode} menuOpen={menuOpen} setDarkMode={setDarkMode} setMenuOpen={setMenuOpen} />{page}<Footer darkMode={darkMode} /></>;
