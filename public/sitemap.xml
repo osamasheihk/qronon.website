@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://qronon.ai/</loc></url>
+  <url><loc>https://qronon.ai/platform</loc></url>
+  <url><loc>https://qronon.ai/applications</loc></url>
+  <url><loc>https://qronon.ai/research</loc></url>
+  <url><loc>https://qronon.ai/news</loc></url>
+  <url><loc>https://qronon.ai/about</loc></url>
+  <url><loc>https://qronon.ai/careers</loc></url>
+  <url><loc>https://qronon.ai/contact</loc></url>
+
+  <url><loc>https://qronon.ai/applications/weather</loc></url>
+  <url><loc>https://qronon.ai/applications/climate-risk</loc></url>
+  <url><loc>https://qronon.ai/applications/energy-grids</loc></url>
+  <url><loc>https://qronon.ai/applications/insurance-resilience</loc></url>
+
+  <url><loc>https://qronon.ai/news/scaling-quantum-enhanced-predictive-intelligence-weather-nvidia-cuda-q</loc></url>
+  <url><loc>https://qronon.ai/news/qronon-receives-aria-funding-quantum-machine-intelligence-earth-systems</loc></url>
+
+  <url><loc>https://qronon.ai/careers/machine-learning-engineer-researcher</loc></url>
+</urlset>
